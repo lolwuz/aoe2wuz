@@ -21,10 +21,19 @@ function buildTechs(techtree, idList) {
   const techsData = techtree["data"]["techs"];
 
   idList.forEach((id) => {
-    techs.push(techsData[id]);
+    let tech = techsData[id];
+
+    tech.LanguageHelp = getName(techtree, tech.LanguageHelpId);
+    tech.LanguageName = getName(techtree, tech.LanguageHelpId);
+
+    techs.push(tech);
   });
 
   return techs;
+}
+
+function getName(techtree, id) {
+  return techtree["strings"][id];
 }
 
 function buildUnits(techtree, idList) {
@@ -38,7 +47,12 @@ function buildUnits(techtree, idList) {
   const unitsData = techtree["data"]["units"];
 
   idList.forEach((id) => {
-    units.push(unitsData[id]);
+    let unit = unitsData[id];
+
+    unit.LanguageHelp = getName(techtree, unit.LanguageHelpId);
+    unit.LanguageName = getName(techtree, unit.LanguageHelpId);
+
+    units.push(unit);
   });
 
   return units;
@@ -55,10 +69,73 @@ function buildBuildings(techtree, idList) {
   const buildingsData = techtree["data"]["buildings"];
 
   idList.forEach((id) => {
-    buildings.push(buildingsData[id]);
+    let building = buildingsData[id];
+
+    building.LanguageHelp = getName(techtree, building.LanguageHelpId);
+    building.LanguageName = getName(techtree, building.LanguageHelpId);
+
+    buildings.push(building);
   });
 
   return buildings;
+}
+
+function getEnabledBuildings(techtree, disabled) {
+  const idList = civconfig.enabledBuildings;
+
+  const buildings = [];
+  const buildingsData = techtree["data"]["buildings"];
+
+  idList.forEach((id) => {
+    let building = buildingsData[id];
+
+    building.LanguageHelp = getName(techtree, building.LanguageHelpId);
+    building.LanguageName = getName(techtree, building.LanguageHelpId);
+
+    if (!disabled.includes(building.id)) buildings.push(building);
+  });
+
+  return buildings;
+}
+
+function getEnabledUnits(techtree, disabled) {
+  const idList = civconfig.enabledUnits;
+
+  const units = [];
+  const unitsData = techtree["data"]["units"];
+
+  idList.forEach((id) => {
+    let unit = unitsData[id];
+
+    unit.LanguageHelp = getName(techtree, unit.LanguageHelpId);
+    unit.LanguageName = getName(techtree, unit.LanguageHelpId);
+
+    if (!disabled.includes(units.id)) units.push(unit);
+  });
+
+  return units;
+}
+
+function getEnabledTechs(techtree, disabled) {
+  const idList = civconfig.enabledTechs;
+
+  const techs = [];
+  const techsData = techtree["data"]["techs"];
+
+  idList.forEach((id) => {
+    let tech = techsData[id];
+
+    if (!tech) return;
+
+    console.log(tech);
+
+    tech.LanguageHelp = getName(techtree, tech.LanguageHelpId);
+    tech.LanguageName = getName(techtree, tech.LanguageHelpId);
+
+    if (!disabled.includes(techs.id)) techs.push(tech);
+  });
+
+  return techs;
 }
 
 function buildUnique(techtree, idList) {
@@ -104,12 +181,13 @@ exports.getCivilizations = function (techtree) {
   const civKeys = Object.keys(civNames);
 
   civKeys.forEach((civName) => {
+    const civId = civNames[civName];
     // find the correct helper text for the civilizations name
     const civHelpTextKey = civHelpTexts[civName];
     const civHelpText = strings[civHelpTextKey];
 
     // add civ to full list
-    civilizations.push({ name: civName, help_text: civHelpText });
+    civilizations.push({ name: civName, help_text: civHelpText, id: civId });
   });
 
   return civilizations;
@@ -119,6 +197,7 @@ exports.getCivInfo = function (techtree, civ) {
   /**
    * returns full techtree info of a specific civilization
    */
+
   let civInfo = Object.create(civconfig.civsConfig[civ.name]);
 
   // find DISABLED techs, units and building for the civ
@@ -144,16 +223,24 @@ exports.getCivInfo = function (techtree, civ) {
   const unique = buildUnique(techtree, civInfo.unique);
 
   // set all found
+  civInfo.disabled = {};
   civInfo.disabled.units = unitsDisabled;
   civInfo.disabled.techs = techsDisabled;
   civInfo.disabled.buildings = buildingsDisabled;
 
   civInfo.enabled = {};
-  civInfo.enabled.units = unitsEnabled;
-  civInfo.enabled.techs = techsEnabled;
-  civInfo.enabled.buildings = buildingsEnabled;
+  civInfo.enabled.units = unitsEnabled.concat(
+    getEnabledUnits(techtree, buildingsEnabled)
+  );
+  civInfo.enabled.techs = techsEnabled.concat(
+    getEnabledTechs(techtree, buildingsEnabled)
+  );
+  civInfo.enabled.buildings = buildingsEnabled.concat(
+    getEnabledBuildings(techtree, buildingsEnabled)
+  );
 
   civInfo.unique = unique;
+  civInfo.civ = civ;
 
   return civInfo;
 };

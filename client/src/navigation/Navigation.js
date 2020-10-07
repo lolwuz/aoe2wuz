@@ -3,26 +3,36 @@ import PropTypes from "prop-types";
 import {
   AppBar,
   Container,
+  IconButton,
   makeStyles,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    marginBottom: theme.spacing(3),
+    zIndex: theme.zIndex.drawer + 1,
   },
 }));
 
-const Navigation = (props) => {
+const Navigation = ({ handleToggle, open }) => {
+  const theme = useTheme();
+  const desktop = useMediaQuery(theme.breakpoints.up("md"));
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Container>
-          <Typography variant="h6">Civs</Typography>
-        </Container>
+        {!desktop && (
+          <IconButton onClick={() => handleToggle()} color="inherit">
+            <MenuIcon />
+          </IconButton>
+        )}
+
+        <Typography variant="h6">AGE 2 DASHBOARD</Typography>
       </Toolbar>
     </AppBar>
   );
