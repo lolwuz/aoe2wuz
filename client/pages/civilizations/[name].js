@@ -34,8 +34,6 @@ const civilizations = ({ civilization }) => {
     buildingSearch: "",
   });
 
-  console.log(enabled.units);
-
   const firstLine = civ.help_text.split("\n")[0];
 
   const handleChange = (event) => {
