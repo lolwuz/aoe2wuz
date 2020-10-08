@@ -17,6 +17,7 @@ import UnitsList from "../../src/units/UnitsList";
 import CivCard from "../../src/civilizations/CivCard";
 import ButtonLink from "../../src/navigation/ButtonLink";
 import Link from "next/link";
+import { API_URL } from "../../src/constants";
 
 const useStyles = makeStyles((theme) => ({
   returnButton: {
@@ -158,7 +159,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { name } = params;
 
-  const res = await fetch(`http://localhost:4000/civilizations/${name}`);
+  const res = await fetch(`${API_URL}civilizations/${name}`);
   const data = await res.json();
 
   return {

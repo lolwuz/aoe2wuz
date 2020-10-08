@@ -32,9 +32,9 @@ function buildTechs(techtree, idList) {
   return techs;
 }
 
-function getName(techtree, id) {
+exports.getName = (techtree, id) => {
   return techtree["strings"][id];
-}
+};
 
 function buildUnits(techtree, idList) {
   /**

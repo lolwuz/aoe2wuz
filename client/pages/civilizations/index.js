@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import CivCard from "../../src/civilizations/CivCard";
+import { API_URL } from "../../src/constants";
 
 const useStyles = makeStyles((theme) => ({
   searchField: {
@@ -74,7 +75,7 @@ const civilizations = ({ civilizations }) => {
 civilizations.propTypes = {};
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:4000/civilizations");
+  const res = await fetch(`${API_URL}civilizations`);
   const civilizations = await res.json();
 
   return {

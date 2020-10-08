@@ -1,14 +1,19 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
-const stream = require("stream");
+
+// swagger
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const civilaztions = require("./routes/civilizations");
 
+//routes
+const civilaztions = require("./routes/civilizations");
+const counters = require("./routes/counters");
+const units = require("./routes/units");
+
+// initialize app
 const app = express();
 const port = 4001;
 
+// swagger options TODO: add to constants file somewhere
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
@@ -17,7 +22,7 @@ const swaggerOptions = {
       contact: {
         name: "lolwuz",
       },
-      servers: ["http://localhost:4000"],
+      servers: ["http://localhost:4001"],
     },
   },
   // ['.routes/*.js']
@@ -47,6 +52,36 @@ app.get("/civilizations", civilaztions.findAll);
  *      '200': A successfull response
  */
 app.get("/civilizations/:name", civilaztions.findByName);
+
+/**
+ * @swagger
+ * /units:
+ *  get:
+ *    description: returns one civilizations
+ *    responses:
+ *      '200': A successfull response
+ */
+app.get("/units", units.findAll);
+
+/**
+ * @swagger
+ * /units/:id:
+ *  get:
+ *    description: returns one civilizations
+ *    responses:
+ *      '200': A successfull response
+ */
+app.get("/units/:id", units.findById);
+
+/**
+ * @swagger
+ * /counters/:id:
+ *  get:
+ *    description: returns counter from id
+ *    responses:
+ *      '200': A successfull response
+ */
+app.get("/counters/:id", counters.findByUnitId);
 
 /**
  * @swagger
