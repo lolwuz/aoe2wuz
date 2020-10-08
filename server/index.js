@@ -7,7 +7,7 @@ const swaggerUi = require("swagger-ui-express");
 const civilaztions = require("./routes/civilizations");
 
 const app = express();
-const port = 4000;
+const port = 4001;
 
 const swaggerOptions = {
   swaggerDefinition: {

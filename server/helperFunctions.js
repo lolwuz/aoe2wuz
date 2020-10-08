@@ -127,8 +127,6 @@ function getEnabledTechs(techtree, disabled) {
 
     if (!tech) return;
 
-    console.log(tech);
-
     tech.LanguageHelp = getName(techtree, tech.LanguageHelpId);
     tech.LanguageName = getName(techtree, tech.LanguageHelpId);
 
