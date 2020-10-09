@@ -20,6 +20,15 @@ import GoogleAds from "react-google-ads";
 const useStyles = makeStyles((theme) => ({
   card: {
     minHeight: 140,
+    transition: "0.3s",
+    "&:hover": {
+      boxShadow: "0px 9px 20px -12px rgba(0,0,0,0.6)",
+      backgroundColor: theme.palette.background.paper,
+    },
+    "&:focussed": {
+      boxShadow: "0px 9px 20px -12px rgba(0,0,0,0.6)",
+      backgroundColor: theme.palette.background.paper,
+    },
   },
   cardMedia: {
     height: "100%",
@@ -35,52 +44,32 @@ const CivCard = ({ civ }) => {
 
   return (
     <Card className={classes.card}>
-      <Grid container>
-        <GoogleAds client="" slot="" style={{ width: "100%", height: 100 }} />
-        <Grid item xs={3}>
-          <CardContent>
-            <img
-              src={`${API_URL}images/Civs/${name.toLowerCase()}.png`}
-              className={classes.cardMedia}
-            />
-          </CardContent>
-        </Grid>
-        <Grid item xs={9}>
-          <CardContent>
-            <Typography variant="h6">{name}</Typography>
+      <Link href={`/civilizations/${name}`}>
+        <CardActionArea>
+          <Grid container>
+            <Grid item sm={5} md={4}>
+              <CardContent>
+                <img
+                  src={`${API_URL}images/Civs/${name.toLowerCase()}.png`}
+                  className={classes.cardMedia}
+                />
+              </CardContent>
+            </Grid>
+            <Grid item sm={7} md={8}>
+              <CardContent>
+                <Typography variant="h6">{name}</Typography>
 
-            <Typography
-              variant="body1"
-              dangerouslySetInnerHTML={{
-                __html: firstLine,
-              }}
-            />
-          </CardContent>
-        </Grid>
-      </Grid>
-
-      <Collapse in={collapsed} collapsedHeight={0}>
-        <CardContent>
-          <Typography
-            variant="body1"
-            dangerouslySetInnerHTML={{
-              __html: help_text,
-            }}
-          />
-        </CardContent>
-      </Collapse>
-
-      <CardActions style={{ textAlign: "right" }}>
-        <Button onClick={() => setCollapsed(!collapsed)} variant="outlined">
-          quick info
-        </Button>
-
-        <Link href={`/civilizations/${name}`}>
-          <Button variant="contained" color="primary">
-            full info
-          </Button>
-        </Link>
-      </CardActions>
+                <Typography
+                  variant="body1"
+                  dangerouslySetInnerHTML={{
+                    __html: firstLine,
+                  }}
+                />
+              </CardContent>
+            </Grid>
+          </Grid>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 };

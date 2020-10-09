@@ -2,21 +2,37 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import MainTemplate from "../../src/templates/MainTemplate";
 import {
+  Card,
+  CardContent,
   Container,
+  Divider,
   FormControl,
   Grid,
   InputLabel,
   makeStyles,
   MenuItem,
+  Paper,
   Select,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import CivCard from "../../src/civilizations/CivCard";
 import { API_URL } from "../../src/constants";
 
 const useStyles = makeStyles((theme) => ({
-  searchField: {
-    marginBottom: theme.spacing(1.5),
+  searchContainer: {
+    marginTop: -theme.spacing(3),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    borderRadius: 0,
+  },
+  titleGrid: {
+    textAlign: "center",
+  },
+  title: {
+    marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(1),
+    fontWeight: 600,
   },
 }));
 
@@ -32,30 +48,26 @@ const civilizations = ({ civilizations }) => {
 
   return (
     <MainTemplate>
-      <Container maxWidth="xl">
+      <Container className={classes.searchContainer}>
         <Grid container spacing={3}>
-          <Grid item xs={9}>
+          <Grid item xs={12} sm={8} md={6}>
             <TextField
-              fullWidth
-              variant="filled"
+              variant="outlined"
               label="search"
               value={state.search}
               onChange={handleChange}
-              className={classes.searchField}
+              fullWidth
             />
           </Grid>
 
-          <Grid item xs={3}>
-            <FormControl variant="filled" fullWidth>
-              <Select id="civilization-type-select" label="hello" value="10">
-                <MenuItem value="10">Ten</MenuItem>
-                <MenuItem value="20">Twenty</MenuItem>
-                <MenuItem value="30">Thirty</MenuItem>
-              </Select>
-            </FormControl>
+          <Grid item xs={12} sm={4} md={6} className={classes.titleGrid}>
+            <Typography variant="h4" className={classes.title}>
+              List of Civilizations
+            </Typography>
           </Grid>
         </Grid>
-
+      </Container>
+      <Container maxWidth="xl" className={classes.itemsContainer}>
         <Grid container spacing={3}>
           {civilizations
             .filter((civ) =>

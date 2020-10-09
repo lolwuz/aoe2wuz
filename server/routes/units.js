@@ -1,11 +1,19 @@
-const { buildAllUnits } = require("../unitHelpers");
+const { buildAllUnits, buildUnit, getUnitTypes } = require("../unitHelpers");
 
 exports.findAll = (req, res) => {
+  // all units
   const units = buildAllUnits();
 
-  res.send(units);
+  // all diffent types of units for sorting on the front end
+  const types = getUnitTypes();
+
+  res.send({ units, types });
 };
 
 exports.findById = (req, res) => {
-  res.send({});
+  const { id } = req.params;
+
+  const unit = buildUnit(id);
+
+  res.send(unit);
 };

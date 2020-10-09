@@ -3,14 +3,11 @@ const fs = require("fs");
 const path = require("path");
 const civconfig = require("./info/civconfig");
 
-function openFullDataSet() {
-  const raw = fs.readFileSync(path.resolve(__dirname, "./info/full.json"));
-  const data = JSON.parse(raw);
+exports.getName = (techtree, id) => {
+  return techtree["strings"][id];
+};
 
-  return data;
-}
-
-function buildTechs(techtree, idList) {
+exports.buildTechs = (techtree, idList) => {
   /**
    * find correct units data from id list
    * return: list of units
@@ -23,20 +20,16 @@ function buildTechs(techtree, idList) {
   idList.forEach((id) => {
     let tech = techsData[id];
 
-    tech.LanguageHelp = getName(techtree, tech.LanguageHelpId);
-    tech.LanguageName = getName(techtree, tech.LanguageHelpId);
+    tech.LanguageHelp = this.getName(techtree, tech.LanguageHelpId);
+    tech.LanguageName = this.getName(techtree, tech.LanguageHelpId);
 
     techs.push(tech);
   });
 
   return techs;
-}
-
-exports.getName = (techtree, id) => {
-  return techtree["strings"][id];
 };
 
-function buildUnits(techtree, idList) {
+exports.buildUnits = (techtree, idList) => {
   /**
    * find correct units data from id list
    * return: list of units
@@ -49,16 +42,16 @@ function buildUnits(techtree, idList) {
   idList.forEach((id) => {
     let unit = unitsData[id];
 
-    unit.LanguageHelp = getName(techtree, unit.LanguageHelpId);
-    unit.LanguageName = getName(techtree, unit.LanguageHelpId);
+    unit.LanguageHelp = this.getName(techtree, unit.LanguageHelpId);
+    unit.LanguageName = this.getName(techtree, unit.LanguageHelpId);
 
     units.push(unit);
   });
 
   return units;
-}
+};
 
-function buildBuildings(techtree, idList) {
+exports.buildBuildings = (techtree, idList) => {
   /**
    * find correct building data from id list
    * return: list of building items
@@ -71,16 +64,16 @@ function buildBuildings(techtree, idList) {
   idList.forEach((id) => {
     let building = buildingsData[id];
 
-    building.LanguageHelp = getName(techtree, building.LanguageHelpId);
-    building.LanguageName = getName(techtree, building.LanguageHelpId);
+    building.LanguageHelp = this.getName(techtree, building.LanguageHelpId);
+    building.LanguageName = this.getName(techtree, building.LanguageHelpId);
 
     buildings.push(building);
   });
 
   return buildings;
-}
+};
 
-function getEnabledBuildings(techtree, disabled) {
+exports.getEnabledBuildings = (techtree, disabled) => {
   const idList = civconfig.enabledBuildings;
 
   const buildings = [];
@@ -89,16 +82,16 @@ function getEnabledBuildings(techtree, disabled) {
   idList.forEach((id) => {
     let building = buildingsData[id];
 
-    building.LanguageHelp = getName(techtree, building.LanguageHelpId);
-    building.LanguageName = getName(techtree, building.LanguageHelpId);
+    building.LanguageHelp = this.getName(techtree, building.LanguageHelpId);
+    building.LanguageName = this.getName(techtree, building.LanguageHelpId);
 
     if (!disabled.includes(building.id)) buildings.push(building);
   });
 
   return buildings;
-}
+};
 
-function getEnabledUnits(techtree, disabled) {
+exports.getEnabledUnits = (techtree, disabled) => {
   const idList = civconfig.enabledUnits;
 
   const units = [];
@@ -107,16 +100,16 @@ function getEnabledUnits(techtree, disabled) {
   idList.forEach((id) => {
     let unit = unitsData[id];
 
-    unit.LanguageHelp = getName(techtree, unit.LanguageHelpId);
-    unit.LanguageName = getName(techtree, unit.LanguageHelpId);
+    unit.LanguageHelp = this.getName(techtree, unit.LanguageHelpId);
+    unit.LanguageName = this.getName(techtree, unit.LanguageHelpId);
 
     if (!disabled.includes(units.id)) units.push(unit);
   });
 
   return units;
-}
+};
 
-function getEnabledTechs(techtree, disabled) {
+exports.getEnabledTechs = (techtree, disabled) => {
   const idList = civconfig.enabledTechs;
 
   const techs = [];
@@ -127,16 +120,16 @@ function getEnabledTechs(techtree, disabled) {
 
     if (!tech) return;
 
-    tech.LanguageHelp = getName(techtree, tech.LanguageHelpId);
-    tech.LanguageName = getName(techtree, tech.LanguageHelpId);
+    tech.LanguageHelp = this.getName(techtree, tech.LanguageHelpId);
+    tech.LanguageName = this.getName(techtree, tech.LanguageHelpId);
 
     if (!disabled.includes(techs.id)) techs.push(tech);
   });
 
   return techs;
-}
+};
 
-function buildUnique(techtree, idList) {
+exports.buildUnique = (techtree, idList) => {
   /**
    * find correct unique items data from id list
    * return: list of unique items
@@ -151,7 +144,7 @@ function buildUnique(techtree, idList) {
   });
 
   return unique;
-}
+};
 
 exports.openTechtree = function () {
   /**
@@ -199,26 +192,26 @@ exports.getCivInfo = function (techtree, civ) {
   let civInfo = Object.create(civconfig.civsConfig[civ.name]);
 
   // find DISABLED techs, units and building for the civ
-  const techsDisabled = buildTechs(techtree, civInfo.disabled.techs);
-  const unitsDisabled = buildUnits(techtree, civInfo.disabled.units);
-  const buildingsDisabled = buildBuildings(
+  const techsDisabled = this.buildTechs(techtree, civInfo.disabled.techs);
+  const unitsDisabled = this.buildUnits(techtree, civInfo.disabled.units);
+  const buildingsDisabled = this.buildBuildings(
     techtree,
     civInfo.disabled.buildings
   );
 
   // find ENABLED techs, units and buildings
   const techsEnabled = civInfo.enabled
-    ? buildTechs(techtree, civInfo.enabled.techs)
+    ? this.buildTechs(techtree, civInfo.enabled.techs)
     : [];
   const unitsEnabled = civInfo.enabled
-    ? buildUnits(techtree, civInfo.enabled.units)
+    ? this.buildUnits(techtree, civInfo.enabled.units)
     : [];
   const buildingsEnabled = civInfo.enabled
-    ? buildUnits(techtree, civInfo.enabled.buildings)
+    ? this.buildUnits(techtree, civInfo.enabled.buildings)
     : [];
 
   // find UNIQUE buildings, units and techs
-  const unique = buildUnique(techtree, civInfo.unique);
+  const unique = this.buildUnique(techtree, civInfo.unique);
 
   // set all found
   civInfo.disabled = {};
@@ -228,13 +221,13 @@ exports.getCivInfo = function (techtree, civ) {
 
   civInfo.enabled = {};
   civInfo.enabled.units = unitsEnabled.concat(
-    getEnabledUnits(techtree, buildingsEnabled)
+    this.getEnabledUnits(techtree, buildingsEnabled)
   );
   civInfo.enabled.techs = techsEnabled.concat(
-    getEnabledTechs(techtree, buildingsEnabled)
+    this.getEnabledTechs(techtree, buildingsEnabled)
   );
   civInfo.enabled.buildings = buildingsEnabled.concat(
-    getEnabledBuildings(techtree, buildingsEnabled)
+    this.getEnabledBuildings(techtree, buildingsEnabled)
   );
 
   civInfo.unique = unique;
