@@ -1,29 +1,34 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import {
-  amber,
-  blue,
-  blueGrey,
-  deepOrange,
-  lightBlue,
-  orange,
-  red,
-  yellow,
-} from "@material-ui/core/colors";
+import { red, orange } from "@material-ui/core/colors";
+
+let shadows = new Array(25).fill("0px 10px 40px -12px rgba(0,0,0,0.2)");
+
+shadows[0] = "none";
+shadows[24] = "0px 10px 40px -12px rgba(0,0,0,0.4)";
 
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
     type: "light",
     primary: red,
-    secondary: lightBlue,
+    secondary: orange,
   },
   shape: {
     borderRadius: 10,
   },
   spacing: 8,
-  shadows: new Array(25).fill("0px 0px 20px -12px rgba(0,0,0,0.4)"),
+  shadows: shadows,
   typography: {
     fontFamily: "Source Sans Pro, sans-serif",
+    h1: { fontWeight: 600 },
+    h2: { fontWeight: 600 },
+    h3: { fontWeight: 600 },
+    h4: { fontWeight: 600 },
+    h5: { fontWeight: 600 },
+    h6: { fontWeight: 600 },
+    button: {
+      fontWeight: 600,
+    },
     subtitle1: {
       fontWeight: 600,
     },
@@ -35,6 +40,11 @@ const theme = createMuiTheme({
     MuiDrawer: {
       paperAnchorDockedLeft: {
         borderWidth: 0,
+      },
+    },
+    MuiCardActionArea: {
+      focusHighlight: {
+        backgroundColor: "white",
       },
     },
   },

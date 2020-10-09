@@ -2,22 +2,17 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import MainTemplate from "../../src/templates/MainTemplate";
 import {
-  Card,
-  CardContent,
   Container,
-  Divider,
-  FormControl,
   Grid,
-  InputLabel,
+  InputBase,
   makeStyles,
-  MenuItem,
   Paper,
-  Select,
   TextField,
   Typography,
 } from "@material-ui/core";
 import CivCard from "../../src/civilizations/CivCard";
 import { API_URL } from "../../src/constants";
+import SearchField from "../../src/navigation/SearchField";
 
 const useStyles = makeStyles((theme) => ({
   searchContainer: {
@@ -31,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginBottom: theme.spacing(3),
-    marginTop: theme.spacing(1),
     fontWeight: 600,
   },
 }));
@@ -51,12 +45,11 @@ const civilizations = ({ civilizations }) => {
       <Container className={classes.searchContainer}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8} md={6}>
-            <TextField
-              variant="outlined"
-              label="search"
+            <SearchField
+              name="search"
               value={state.search}
               onChange={handleChange}
-              fullWidth
+              label="Search civs..."
             />
           </Grid>
 

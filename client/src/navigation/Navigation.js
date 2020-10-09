@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   AppBar,
   Button,
-  Container,
   IconButton,
   makeStyles,
   Toolbar,
@@ -14,6 +13,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import GamesIcon from "@material-ui/icons/Games";
+import { GlobalSearch } from "./GlobalSearch";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     fontWeight: 600,
+  },
+  button: {
+    color: theme.palette.background.paper,
   },
   buttonMatches: {
     marginLeft: theme.spacing(1),
@@ -62,11 +65,15 @@ const Navigation = ({ handleToggle, open }) => {
           </IconButton>
         )}
 
-        <img src="/helmet.jpg" className={classes.logo} />
-
-        <Typography variant="h5" className={classes.title}>
-          aoe2dashboard.com
+        <Typography variant="h6" className={classes.title}>
+          aoe2dash.com
         </Typography>
+
+        <GlobalSearch />
+
+        <Button size="large" className={classes.button}>
+          leaderboards
+        </Button>
 
         <Button
           size="large"

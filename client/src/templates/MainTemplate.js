@@ -26,7 +26,7 @@ import Link from "next/link";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { useRouter } from "next/router";
 
-const drawerWith = 160;
+const drawerWith = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 2,
     maskImage:
       "radial-gradient(circle 10px at 100% 100%, transparent 0, transparent 20px, black 20px)",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   fixFade: {
     position: "fixed",
@@ -88,12 +91,18 @@ const useStyles = makeStyles((theme) => ({
     top: 84,
     backgroundColor: theme.palette.primary.main,
     zIndex: theme.zIndex.drawer + 2,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   fixBottom: {
     width: "100%",
     height: "100%",
     backgroundColor: theme.palette.primary.main,
     marginTop: -theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   navPointer: {
     top: 5,
