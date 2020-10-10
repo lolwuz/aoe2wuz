@@ -1,16 +1,21 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { red, orange } from "@material-ui/core/colors";
+import { red, orange, blue } from "@material-ui/core/colors";
 
 let shadows = new Array(25).fill("0px 10px 40px -12px rgba(0,0,0,0.2)");
 
 shadows[0] = "none";
 shadows[24] = "0px 10px 40px -12px rgba(0,0,0,0.4)";
 
+let primaryBlue = blue;
+
+primaryBlue.main = "#222a57";
+primaryBlue.dark = "#222a40";
+
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
     type: "light",
-    primary: red,
+    primary: blue,
     secondary: orange,
   },
   shape: {

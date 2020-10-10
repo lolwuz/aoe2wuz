@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   cardMedia: {
     height: "100%",
   },
+  title: {
+    color: theme.palette.primary.main,
+  },
 }));
 
 const CivCard = ({ civ }) => {
@@ -55,7 +58,9 @@ const CivCard = ({ civ }) => {
             </Grid>
             <Grid item sm={7} md={8}>
               <CardContent>
-                <Typography variant="h6">{name}</Typography>
+                <Typography variant="h6" className={classes.title}>
+                  {name}
+                </Typography>
 
                 <Typography
                   variant="body1"

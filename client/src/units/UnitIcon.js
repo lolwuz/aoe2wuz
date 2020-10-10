@@ -1,8 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, Tooltip, Typography } from "@material-ui/core";
+import {
+  CardActionArea,
+  makeStyles,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
 import { API_URL } from "../constants";
 import TechToolTip from "../navigation/TechToolTip";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   unitImage: {
@@ -43,11 +49,13 @@ const UnitIcon = ({ unit }) => {
         />
       }
     >
-      <img
-        src={`${API_URL}images/Units/${isMonk ? "monk" : unit.ID}.png`}
-        alt={unit.internal_name}
-        className={classes.unitImage}
-      />
+      <Link href={`/units/${unit.ID}`}>
+        <img
+          src={`${API_URL}images/Units/${isMonk ? "monk" : unit.ID}.png`}
+          alt={unit.internal_name}
+          className={classes.unitImage}
+        />
+      </Link>
     </TechToolTip>
   );
 };
