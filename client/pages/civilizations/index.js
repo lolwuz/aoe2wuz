@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   title: {
-    marginBottom: theme.spacing(3),
     fontWeight: 600,
   },
 }));
@@ -42,7 +41,7 @@ const civilizations = ({ civilizations }) => {
 
   return (
     <MainTemplate>
-      <Container className={classes.searchContainer}>
+      <Container maxWidth="xl" className={classes.searchContainer}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8} md={6}>
             <SearchField

@@ -4,14 +4,11 @@ import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "absolute",
-    left: 200,
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     display: "flex",
     alignItems: "center",
     backgroundColor: theme.palette.primary.dark,
-
     borderRadius: theme.shape.borderRadius * 4,
   },
   input: {

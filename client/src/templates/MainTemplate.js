@@ -37,9 +37,13 @@ const useStyles = makeStyles((theme) => ({
       width: drawerWith,
       flexShrink: 0,
     },
+    boxShadow: theme.shadows[4],
   },
   drawerPaper: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.background.paper
+        : theme.palette.primary.dark,
     color: theme.palette.background.paper,
     width: drawerWith,
     height: "100%",
@@ -59,10 +63,12 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   navList: {
     marginTop: theme.spacing(6),
+    background: theme.palette.primary.dark,
   },
   footer: {
     flexGrow: 0,
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
   },
   footerDiv: {},
   githubIcon: {
@@ -76,7 +82,10 @@ const useStyles = makeStyles((theme) => ({
     height: 20,
     width: drawerWith + 20,
     top: 64,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.background.paper
+        : theme.palette.primary.main,
     zIndex: theme.zIndex.drawer + 2,
     maskImage:
       "radial-gradient(circle 10px at 100% 100%, transparent 0, transparent 20px, black 20px)",
@@ -89,7 +98,10 @@ const useStyles = makeStyles((theme) => ({
     height: 34,
     width: drawerWith,
     top: 84,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.background.paper
+        : theme.palette.primary.main,
     zIndex: theme.zIndex.drawer + 2,
     [theme.breakpoints.down("sm")]: {
       display: "none",
@@ -98,11 +110,20 @@ const useStyles = makeStyles((theme) => ({
   fixBottom: {
     width: "100%",
     height: "100%",
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.background.paper // todo: fix?
+        : theme.palette.primary.main,
     marginTop: -theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
+  },
+  listItem: {
+    color:
+      theme.palette.type === "dark"
+        ? theme.palette.text.primary
+        : theme.palette.background.paper,
   },
   navPointer: {
     top: 5,
@@ -111,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
     width: 0,
     borderTop: "20px solid transparent",
     borderBottom: "20px solid transparent",
-    borderRight: `20px solid rgb(240, 240, 240)`,
+    borderRight: `20px solid ${theme.palette.background.default}`,
     position: "absolute",
   },
   chatButton: {
@@ -153,7 +174,10 @@ const MainTemplate = ({ children }) => {
               <ListItem button key={text}>
                 <ListItemText
                   primary={
-                    <Typography variant="subtitle1">
+                    <Typography
+                      variant="subtitle1"
+                      className={classes.listItem}
+                    >
                       {text.toUpperCase()}
                     </Typography>
                   }
@@ -202,43 +226,45 @@ const MainTemplate = ({ children }) => {
         {/* footer */}
         <footer className={classes.footer}>
           <div className={classes.footerDiv}>
-            <Card>
-              <CardContent>
-                <Typography variant="body2">
-                  Age of Empires II DE © Microsoft Corporation. 'website-name'
-                  was created under Microsoft's "Game Content Usage Rules" using
-                  assets from Age of Empires II DE, and it is not endorsed by or
-                  affiliated with Microsoft.
-                </Typography>
+            <Container maxWidth="xl">
+              <Card>
+                <CardContent>
+                  <Typography variant="body2">
+                    Age of Empires II DE © Microsoft Corporation. 'website-name'
+                    was created under Microsoft's "Game Content Usage Rules"
+                    using assets from Age of Empires II DE, and it is not
+                    endorsed by or affiliated with Microsoft.
+                  </Typography>
 
-                <Grid container spacing={3}>
-                  <Grid item xs={8}>
-                    <Typography variant="body2" className={classes.madeBy}>
-                      Made with love by{" "}
+                  <Grid container spacing={3}>
+                    <Grid item xs={8}>
+                      <Typography variant="body2" className={classes.madeBy}>
+                        Made with love by{" "}
+                        <a
+                          target="_about:blank"
+                          rel="noreferrer noopener"
+                          href="https://metmarten.dev"
+                        >
+                          Marten Hoekstra
+                        </a>
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
                       <a
                         target="_about:blank"
                         rel="noreferrer noopener"
-                        href="https://metmarten.dev"
+                        href="https://github.com/lolwuz/aoe2wuz/"
                       >
-                        Marten Hoekstra
+                        <IconButton className={classes.githubIcon}>
+                          <GitHubIcon />
+                        </IconButton>
                       </a>
-                    </Typography>
+                    </Grid>
                   </Grid>
-
-                  <Grid item xs={4}>
-                    <a
-                      target="_about:blank"
-                      rel="noreferrer noopener"
-                      href="https://github.com/lolwuz/aoe2wuz/"
-                    >
-                      <IconButton className={classes.githubIcon}>
-                        <GitHubIcon />
-                      </IconButton>
-                    </a>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Container>
           </div>
         </footer>
       </main>

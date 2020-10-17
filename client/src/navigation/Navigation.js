@@ -14,11 +14,16 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import GamesIcon from "@material-ui/icons/Games";
 import { GlobalSearch } from "./GlobalSearch";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     display: "flex",
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.background.paper
+        : theme.palette.primary.main,
   },
   logo: {
     height: 45,
@@ -27,6 +32,23 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     fontWeight: 600,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  buttons: {
+    flexGrow: 1,
+    textAlign: "right",
+  },
+  globalSearch: {
+    position: "absolute",
+    left: 200,
+    [theme.breakpoints.down("sm")]: {
+      left: 80,
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
   button: {
     color: theme.palette.background.paper,
@@ -69,29 +91,39 @@ const Navigation = ({ handleToggle, open }) => {
           aoe2dash.com
         </Typography>
 
-        <GlobalSearch />
+        <div className={classes.globalSearch}>
+          <GlobalSearch />
+        </div>
 
-        <Button size="large" className={classes.button}>
-          leaderboards
-        </Button>
+        <div className={classes.buttons}>
+          <Link href="/leaderboards">
+            <Button size="large" className={classes.button}>
+              leaderboards
+            </Button>
+          </Link>
 
-        <Button
-          size="large"
-          variant="contained"
-          className={classes.buttonMatches}
-          startIcon={<GamesIcon />}
-        >
-          My Matches
-        </Button>
+          <Link href="/matches">
+            <Button
+              size="large"
+              variant="contained"
+              className={classes.buttonMatches}
+              startIcon={desktop && <GamesIcon />}
+            >
+              {desktop ? "My Matches" : <GamesIcon />}
+            </Button>
+          </Link>
 
-        <Button
-          size="large"
-          variant="outlined"
-          className={classes.buttonRegister}
-          startIcon={<PersonIcon />}
-        >
-          Register
-        </Button>
+          <Link href="/leaderboards">
+            <Button
+              size="large"
+              variant="outlined"
+              className={classes.buttonRegister}
+              startIcon={desktop && <PersonIcon />}
+            >
+              {desktop ? "Register" : <PersonIcon />}
+            </Button>
+          </Link>
+        </div>
       </Toolbar>
     </AppBar>
   );

@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
+    ["&:hover"]: {
+      boxShadow: theme.shadows[5],
+    },
   },
   input: {
     marginLeft: theme.spacing(1),
