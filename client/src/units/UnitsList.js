@@ -1,8 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TechIcon from "./UnitIcon";
-import { Card, CardContent, makeStyles } from "@material-ui/core";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import UnitIcon from "./UnitIcon";
+import UnitInfoCard from "./UnitInfoCard";
+import UnitCard from "./UnitCard";
 
 const useStyles = makeStyles((theme) => ({
   unitsList: {
@@ -14,13 +23,15 @@ const UnitsList = ({ units }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.unitsList}>
-      <CardContent>
+    <div className={classes.unitsList}>
+      <Grid container spacing={3}>
         {units.map((unit) => (
-          <UnitIcon unit={unit} key={unit.ID} />
+          <Grid item xs={4} key={unit.ID}>
+            <UnitCard unit={unit} />
+          </Grid>
         ))}
-      </CardContent>
-    </Card>
+      </Grid>
+    </div>
   );
 };
 

@@ -1,21 +1,25 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import {
   orange,
-  blue,
-  deepOrange,
   indigo,
-  grey,
+  blue,
+  yellow,
+  blueGrey,
 } from "@material-ui/core/colors";
 
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
     type: "light",
-    primary: indigo,
-    secondary: orange,
+    primary: blueGrey,
+    secondary: indigo,
+    background: {
+      default: "#F5F5F5",
+      paper: "#FFFFFF",
+    },
   },
   shape: {
-    borderRadius: 10,
+    borderRadius: 0,
   },
   spacing: 8,
   typography: {
@@ -36,6 +40,7 @@ const theme = createMuiTheme({
       fontSize: 16,
     },
   },
+  shadows: new Array(25).fill("none"),
   overrides: {
     MuiDrawer: {
       paperAnchorDockedLeft: {
@@ -58,7 +63,7 @@ const darkTheme = createMuiTheme({
     secondary: orange,
   },
   shape: {
-    borderRadius: 10,
+    borderRadius: 0,
   },
   spacing: 8,
   typography: {
@@ -79,6 +84,7 @@ const darkTheme = createMuiTheme({
       fontSize: 16,
     },
   },
+  shadows: new Array(25).fill("none"),
   overrides: {
     MuiDrawer: {
       paperAnchorDockedLeft: {

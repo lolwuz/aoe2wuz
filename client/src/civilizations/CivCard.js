@@ -22,11 +22,10 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 140,
     transition: "0.3s",
     "&:hover": {
-      boxShadow: theme.shadows[6],
-      marginTop: -theme.spacing(0.5),
+      boxShadow: `0px 0px 0px 1px ${theme.palette.primary.light}`,
     },
     "&:focussed": {
-      boxShadow: theme.shadows[6],
+      boxShadow: `0px 0px 0px 1px ${theme.palette.primary.light}`,
     },
   },
   cardMedia: {

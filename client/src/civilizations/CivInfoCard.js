@@ -16,10 +16,14 @@ import {
 } from "@material-ui/core";
 import { API_URL } from "../constants";
 import ChevronLeftIcon from "@material-ui/icons/ChevronRight";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
   selected: {
     backgroundColor: theme.palette.primary[50],
+  },
+  icon: {
+    width: 20,
   },
 }));
 
@@ -43,38 +47,64 @@ const CivInfoCard = ({ civ }) => {
       </Grid>
 
       <List>
-        <ListItem button className={classes.selected}>
-          <ListItemText
-            primary={<Typography variant="overline">Build Orders</Typography>}
-          />
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
-        </ListItem>
+        <Link href={`/civilizations/${name}/builds`}>
+          <ListItem button className={classes.selected}>
+            <ListItemIcon>
+              <img
+                src="/img/Techtree.svg"
+                alt="techtree-icon"
+                className={classes.icon}
+              />
+            </ListItemIcon>
+            <ListItemText
+              primary={<Typography variant="overline">Build Orders</Typography>}
+            />
+            <ListItemIcon>
+              <IconButton>
+                <ChevronLeftIcon />
+              </IconButton>
+            </ListItemIcon>
+          </ListItem>
+        </Link>
 
-        <ListItem button>
-          <ListItemText
-            primary={<Typography variant="overline">Technologies</Typography>}
-          />
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
-        </ListItem>
+        <Link href={`/civilizations/${name}/units`}>
+          <ListItem button>
+            <ListItemText
+              primary={<Typography variant="overline">units</Typography>}
+            />
+            <ListItemIcon>
+              <IconButton>
+                <ChevronLeftIcon />
+              </IconButton>
+            </ListItemIcon>
+          </ListItem>
+        </Link>
 
-        <ListItem button>
-          <ListItemText
-            primary={<Typography variant="overline">Buildings</Typography>}
-          />
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
-        </ListItem>
+        <Link href={`/civilizations/${name}/techs`}>
+          <ListItem button>
+            <ListItemText
+              primary={<Typography variant="overline">Technologies</Typography>}
+            />
+            <ListItemIcon>
+              <IconButton>
+                <ChevronLeftIcon />
+              </IconButton>
+            </ListItemIcon>
+          </ListItem>
+        </Link>
+
+        <Link href={`/civilizations/${name}/buildings`}>
+          <ListItem button>
+            <ListItemText
+              primary={<Typography variant="overline">Buildings</Typography>}
+            />
+            <ListItemIcon>
+              <IconButton>
+                <ChevronLeftIcon />
+              </IconButton>
+            </ListItemIcon>
+          </ListItem>
+        </Link>
       </List>
     </Card>
   );

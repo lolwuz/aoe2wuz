@@ -14,8 +14,6 @@ import {
 import TechIcon from "../../../src/techs/TechIcon";
 import TechsList from "../../../src/techs/TechsList";
 import UnitsList from "../../../src/units/UnitsList";
-import CivCard from "../../../src/civilizations/CivCard";
-import ButtonLink from "../../../src/navigation/ButtonLink";
 import Link from "next/link";
 import { API_URL } from "../../../src/constants";
 import CivTemplate from "../../../src/templates/CivTemplate";
@@ -134,6 +132,8 @@ export async function getStaticProps({ params }) {
 
   const res = await fetch(`${API_URL}civilizations/${name}`);
   const data = await res.json();
+
+  console.log(data);
 
   return {
     props: {

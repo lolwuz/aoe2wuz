@@ -42,6 +42,8 @@ exports.buildUnits = (techtree, idList) => {
   idList.forEach((id) => {
     let unit = unitsData[id];
 
+    if (!unit) return;
+
     unit.LanguageHelp = this.getName(techtree, unit.LanguageHelpId);
     unit.LanguageName = this.getName(techtree, unit.LanguageHelpId);
 

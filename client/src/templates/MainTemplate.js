@@ -25,6 +25,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Link from "next/link";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { useRouter } from "next/router";
+import ListIcon from "../navigation/ListIcon";
 
 const drawerWith = 200;
 
@@ -37,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
       width: drawerWith,
       flexShrink: 0,
     },
-    boxShadow: theme.shadows[4],
   },
   drawerPaper: {
     backgroundColor:
@@ -77,48 +77,6 @@ const useStyles = makeStyles((theme) => ({
   madeBy: {
     marginTop: theme.spacing(3),
   },
-  fixShadow: {
-    position: "fixed",
-    height: 20,
-    width: drawerWith + 20,
-    top: 64,
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.background.paper
-        : theme.palette.primary.main,
-    zIndex: theme.zIndex.drawer + 2,
-    maskImage:
-      "radial-gradient(circle 10px at 100% 100%, transparent 0, transparent 20px, black 20px)",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
-  fixFade: {
-    position: "fixed",
-    height: 34,
-    width: drawerWith,
-    top: 84,
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.background.paper
-        : theme.palette.primary.main,
-    zIndex: theme.zIndex.drawer + 2,
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
-  fixBottom: {
-    width: "100%",
-    height: "100%",
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.background.paper // todo: fix?
-        : theme.palette.primary.main,
-    marginTop: -theme.spacing(1),
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  },
   listItem: {
     color:
       theme.palette.type === "dark"
@@ -144,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: theme.spacing(3),
   },
+  listItemIcon: {
+    width: 30,
+  },
 }));
 
 const MainTemplate = ({ children }) => {
@@ -168,28 +129,44 @@ const MainTemplate = ({ children }) => {
       </div>
 
       <List className={classes.navList}>
-        {["Civilizations", "Units", "Techs", "Buildings", "Counters"].map(
-          (text, index) => (
-            <Link href={`/${text.toLowerCase()}`} key={index}>
-              <ListItem button key={text}>
-                <ListItemText
-                  primary={
-                    <Typography
-                      variant="subtitle1"
-                      className={classes.listItem}
-                    >
-                      {text.toUpperCase()}
-                    </Typography>
-                  }
+        {[
+          "Civilizations",
+          "Units",
+          "Techs",
+          "Buildings",
+          "Counters",
+          "Techtree",
+        ].map((text, index) => (
+          <Link
+            href={
+              text === "Techtree"
+                ? "/civilizations/Aztecs/techtree"
+                : `/${text.toLowerCase()}`
+            }
+            key={index}
+          >
+            <ListItem button key={text}>
+              <ListItemIcon>
+                <ListIcon
+                  src={`/img/${text}.svg`}
+                  alt={`${text}-icon`}
+                  invert
                 />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography variant="subtitle1" className={classes.listItem}>
+                    {text.toUpperCase()}
+                  </Typography>
+                }
+              />
 
-                {pathname.toLowerCase().includes(text.toLowerCase()) && (
-                  <div className={classes.navPointer} />
-                )}
-              </ListItem>
-            </Link>
-          )
-        )}
+              {pathname.toLowerCase().includes(text.toLowerCase()) && (
+                <div className={classes.navPointer} />
+              )}
+            </ListItem>
+          </Link>
+        ))}
       </List>
 
       <div className={classes.fixBottom}>
@@ -203,9 +180,6 @@ const MainTemplate = ({ children }) => {
   return (
     <div className={classes.root}>
       <Navigation handleToggle={handleToggle} open={open} />
-
-      <div className={classes.fixShadow} />
-      <div className={classes.fixFade} />
 
       <nav className={classes.drawer}>
         <Drawer
@@ -226,45 +200,43 @@ const MainTemplate = ({ children }) => {
         {/* footer */}
         <footer className={classes.footer}>
           <div className={classes.footerDiv}>
-            <Container maxWidth="xl">
-              <Card>
-                <CardContent>
-                  <Typography variant="body2">
-                    Age of Empires II DE © Microsoft Corporation. 'website-name'
-                    was created under Microsoft's "Game Content Usage Rules"
-                    using assets from Age of Empires II DE, and it is not
-                    endorsed by or affiliated with Microsoft.
-                  </Typography>
+            <Card>
+              <CardContent>
+                <Typography variant="body2">
+                  Age of Empires II DE © Microsoft Corporation. 'website-name'
+                  was created under Microsoft's "Game Content Usage Rules" using
+                  assets from Age of Empires II DE, and it is not endorsed by or
+                  affiliated with Microsoft.
+                </Typography>
 
-                  <Grid container spacing={3}>
-                    <Grid item xs={8}>
-                      <Typography variant="body2" className={classes.madeBy}>
-                        Made with love by{" "}
-                        <a
-                          target="_about:blank"
-                          rel="noreferrer noopener"
-                          href="https://metmarten.dev"
-                        >
-                          Marten Hoekstra
-                        </a>
-                      </Typography>
-                    </Grid>
-
-                    <Grid item xs={4}>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography variant="body2" className={classes.madeBy}>
+                      Made with love by{" "}
                       <a
                         target="_about:blank"
                         rel="noreferrer noopener"
-                        href="https://github.com/lolwuz/aoe2wuz/"
+                        href="https://metmarten.dev"
                       >
-                        <IconButton className={classes.githubIcon}>
-                          <GitHubIcon />
-                        </IconButton>
+                        Marten Hoekstra
                       </a>
-                    </Grid>
+                    </Typography>
                   </Grid>
-                </CardContent>
-              </Card>
-            </Container>
+
+                  <Grid item xs={4}>
+                    <a
+                      target="_about:blank"
+                      rel="noreferrer noopener"
+                      href="https://github.com/lolwuz/aoe2wuz/"
+                    >
+                      <IconButton className={classes.githubIcon}>
+                        <GitHubIcon />
+                      </IconButton>
+                    </a>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
           </div>
         </footer>
       </main>

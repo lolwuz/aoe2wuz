@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchField(props) {
+function SearchField(props) {
   const { label, value, name, onChange, fullWidth } = props;
   const classes = useStyles();
 
@@ -47,3 +47,5 @@ export default function SearchField(props) {
     </Paper>
   );
 }
+
+export default SearchField;

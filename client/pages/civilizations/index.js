@@ -59,6 +59,7 @@ const civilizations = ({ civilizations }) => {
           </Grid>
         </Grid>
       </Container>
+
       <Container maxWidth="xl" className={classes.itemsContainer}>
         <Grid container spacing={3}>
           {civilizations
