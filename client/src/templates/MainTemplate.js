@@ -62,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   navList: {
-    marginTop: theme.spacing(6),
     background: theme.palette.primary.dark,
   },
   footer: {
@@ -94,11 +93,6 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
   },
   chatButton: {
-    color: theme.palette.primary.main,
-    backgroundColor: theme.palette.background.paper,
-    "&:hover": {
-      backgroundColor: theme.palette.background.paper,
-    },
     position: "absolute",
     bottom: theme.spacing(3),
   },
@@ -170,7 +164,12 @@ const MainTemplate = ({ children }) => {
       </List>
 
       <div className={classes.fixBottom}>
-        <Button variant="contained" className={classes.chatButton}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          className={classes.chatButton}
+        >
           chat
         </Button>
       </div>

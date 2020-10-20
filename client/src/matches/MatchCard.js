@@ -7,7 +7,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import MatchPlayer from "../player/matchPlayer";
+import MatchPlayer from "../player/MatchPlayer";
 
 const useStyles = makeStyles((theme) => ({
   vsGrid: {

@@ -67,6 +67,13 @@ const Leaderboards = (props) => {
     <MainTemplate>
       <Head>
         <title>Leaderboards</title>
+
+        <meta name="keywords" content="Leaderboards, Statistics" />
+
+        <meta
+          name="description"
+          content="Age of Empires 2 Leaderboards and Statistics."
+        />
       </Head>
 
       <Container maxWidth="xl">

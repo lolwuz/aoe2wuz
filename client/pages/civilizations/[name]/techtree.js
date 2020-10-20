@@ -2,10 +2,13 @@ import React from "react";
 import { API_URL } from "../../../src/constants";
 import MainTemplate from "../../../src/templates/MainTemplate";
 import {
+  Avatar,
   Button,
+  Chip,
   Container,
   Grid,
   makeStyles,
+  TextField,
   Typography,
   useTheme,
 } from "@material-ui/core";
@@ -13,6 +16,8 @@ import techtreeLines from "../../../src/techtree";
 import SearchField from "../../../src/navigation/SearchField";
 import Link from "next/link";
 import TechtreeItem from "../../../src/techs/TechtreeItem";
+import { Autocomplete } from "@material-ui/lab";
+import { useRouter } from "next/router";
 
 const lineHeight = 220;
 const itemSize = 70;
@@ -63,10 +68,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function techtree({ civilization }) {
+function techtree({ civilization, civilizations }) {
   const theme = useTheme();
   const classes = useStyles();
   const { civ, unique, disabled, enabled } = civilization;
+  const router = useRouter();
+  const { name } = router.query;
 
   return (
     <MainTemplate>
@@ -81,7 +88,35 @@ function techtree({ civilization }) {
           </Grid>
 
           <Grid item xs={8} sm={6} md={4}>
-            <SearchField name="search" label="Search civs..." />
+            <Autocomplete
+              id="civs-selector"
+              options={civilizations}
+              getOptionLabel={(option) => option.name}
+              defaultValue={civilizations.filter((civ) => civ.name === name)[0]}
+              renderOption={(option) => (
+                <Link href={`/civilizations/${option.name}/techtree`}>
+                  <Grid container>
+                    <Grid xs={2}>
+                      <Avatar
+                        src={`${API_URL}images/Civs/${option.name.toLowerCase()}.png`}
+                      />
+                    </Grid>
+                    <Grid xs={10}>
+                      <Typography>{option.name}</Typography>
+                    </Grid>
+                  </Grid>
+                </Link>
+              )}
+              disableClearable
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="filled"
+                  label="Civilization"
+                  placeholder="Choose Civ"
+                />
+              )}
+            />
           </Grid>
         </Grid>
       </Container>
@@ -291,12 +326,16 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { name } = params;
 
-  const res = await fetch(`${API_URL}civilizations/${name}`);
-  const data = await res.json();
+  const resCivilization = await fetch(`${API_URL}civilizations/${name}`);
+  const civilization = await resCivilization.json();
+
+  const resCivilizations = await fetch(`${API_URL}civilizations`);
+  const civilizations = await resCivilizations.json();
 
   return {
     props: {
-      civilization: data,
+      civilization,
+      civilizations,
     },
   };
 }

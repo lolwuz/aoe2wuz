@@ -4,6 +4,7 @@ import MainTemplate from "../../src/templates/MainTemplate";
 import UnitCard from "../../src/units/UnitCard";
 import { API_URL } from "../../src/constants";
 import { Container, Grid, Typography } from "@material-ui/core";
+import Head from "next/head";
 
 const index = ({ data }) => {
   const { units, types } = data;
@@ -26,6 +27,14 @@ const index = ({ data }) => {
 
   return (
     <MainTemplate>
+      <Head>
+        <title>Units</title>
+
+        <meta name="keywords" content="Units" />
+
+        <meta name="description" content="Age of Empires 2 Units." />
+      </Head>
+
       <Container maxWidth="xl">
         <Grid container spacing={3}>
           {list}

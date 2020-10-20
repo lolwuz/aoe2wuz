@@ -7,7 +7,18 @@ export default function Home() {
     <MainTemplate>
       <Head>
         <title>Age of Empires 2 Dashboard</title>
-        <link rel="icon" href="/favicon.ico" />
+
+        <link rel="icon" type="image/svg+xml" href="/img/Civs.svg" />
+
+        <meta
+          name="keywords"
+          content="Age of Empires, DE, 2, AOE2, dashboard"
+        />
+
+        <meta
+          name="description"
+          content="Age of Empires 2 Dashboard. Civilization, Units, Techs, Build Orders and Matches."
+        />
       </Head>
 
       <Container maxWidth="xl">

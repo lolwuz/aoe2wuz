@@ -7,6 +7,8 @@ import CivCard from "../civilizations/CivCard";
 import CivInfoCard from "../civilizations/CivInfoCard";
 import ListIcon from "../navigation/ListIcon";
 import Link from "next/link";
+import Head from "next/head";
+import { API_URL } from "../constants";
 
 const useStyles = makeStyles((theme) => ({
   techtreeButton: {
@@ -21,6 +23,17 @@ const CivTemplate = ({ civilization, children }) => {
 
   return (
     <MainTemplate>
+      <Head>
+        <title>{civ.name}</title>
+
+        <link
+          rel="icon"
+          type="image/png"
+          href={`${API_URL}images/Civs/${civ.name}.png`}
+        />
+
+        <meta name="description" content={civ.help_text} />
+      </Head>
       <Container maxWidth="xl">
         <Grid container spacing={3}>
           <Grid item xs={12}>

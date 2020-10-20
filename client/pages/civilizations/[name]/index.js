@@ -31,11 +31,6 @@ const useStyles = makeStyles((theme) => ({
 const civilizations = ({ civilization }) => {
   const { civ, unique, disabled, enabled } = civilization;
   const classes = useStyles();
-  const [state, setState] = useState({
-    unitSearch: "",
-    techSearch: "",
-    buildingSearch: "",
-  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -43,69 +38,18 @@ const civilizations = ({ civilization }) => {
     setState({ ...state, [name]: value });
   };
 
+  console.log(civ);
+
   return (
     <CivTemplate civilization={civilization}>
-      <Grid container>
-        <Grid item xs={8}>
-          <Link href="/techs">
-            <Button variant="contained" color="secondary">
-              TECHS
-            </Button>
-          </Link>
-        </Grid>
-
-        <Grid item xs={4}>
-          <TextField
-            name="techSearch"
-            variant="standard"
-            margin="none"
-            size="small"
-            label="search techs"
-            onChange={handleChange}
-            value={state.techSearch}
-            fullWidth
+      <Card>
+        <CardContent>
+          <Typography
+            variant="body1"
+            dangerouslySetInnerHTML={{ __html: civ.help_text }}
           />
-        </Grid>
-      </Grid>
-
-      <TechsList
-        techs={enabled.techs.filter((tech) =>
-          tech.LanguageHelp.toUpperCase().includes(
-            state.techSearch.toUpperCase()
-          )
-        )}
-      />
-
-      <Grid container className={classes.techsButton}>
-        <Grid item xs={8}>
-          <Link href="/units">
-            <Button variant="contained" color="secondary">
-              UNITS
-            </Button>
-          </Link>
-        </Grid>
-
-        <Grid item xs={4}>
-          <TextField
-            name="unitSearch"
-            variant="standard"
-            margin="none"
-            size="small"
-            label="search units"
-            onChange={handleChange}
-            value={state.unitSearch}
-            fullWidth
-          />
-        </Grid>
-
-        <UnitsList
-          units={enabled.units.filter((unit) =>
-            unit.LanguageHelp.toUpperCase().includes(
-              state.unitSearch.toUpperCase()
-            )
-          )}
-        />
-      </Grid>
+        </CardContent>
+      </Card>
     </CivTemplate>
   );
 };

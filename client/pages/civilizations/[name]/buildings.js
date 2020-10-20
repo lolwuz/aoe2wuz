@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import { API_URL } from "../../../src/constants";
 import CivTemplate from "../../../src/templates/CivTemplate";
-import TechsList from "../../../src/techs/TechsList";
 import SearchField from "../../../src/navigation/SearchField";
 
 const useStyles = makeStyles((theme) => ({}));
@@ -11,8 +10,6 @@ const buildings = ({ civilization }) => {
   const { civ, unique, disabled, enabled } = civilization;
   const classes = useStyles();
 
-  console.log(enabled.buildings);
-
   return (
     <CivTemplate civilization={civilization}>
       <Grid container spacing={3}>
@@ -20,8 +17,6 @@ const buildings = ({ civilization }) => {
           <SearchField label={`Search ${civ.name} techs...`} />
         </Grid>
       </Grid>
-
-      <BuildingsList techs={enabled.buildings} />
     </CivTemplate>
   );
 };

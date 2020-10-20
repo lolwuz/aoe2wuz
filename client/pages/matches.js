@@ -8,6 +8,13 @@ import MatchCard from "../src/matches/MatchCard";
 const matches = ({ matches }) => {
   return (
     <MainTemplate>
+      <Head>
+        <title>Matches</title>
+
+        <meta name="keywords" content="Matches, Games, My Games" />
+
+        <meta name="description" content="Age of Empires 2 Matches" />
+      </Head>
       <Container maxWidth="xl">
         <Grid container spacing={3}>
           {matches.map((match) => (

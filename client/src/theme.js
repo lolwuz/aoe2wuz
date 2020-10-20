@@ -14,7 +14,7 @@ const theme = createMuiTheme({
     primary: blueGrey,
     secondary: indigo,
     background: {
-      default: "#F5F5F5",
+      default: blueGrey[50],
       paper: "#FFFFFF",
     },
   },
@@ -59,8 +59,8 @@ const theme = createMuiTheme({
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
-    primary: indigo,
-    secondary: orange,
+    primary: blueGrey,
+    secondary: indigo,
   },
   shape: {
     borderRadius: 0,
