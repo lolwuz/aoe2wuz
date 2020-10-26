@@ -1,4 +1,9 @@
 const express = require("express");
+const OAuthServer = require("express-oauth-server");
+
+// server
+const app = express();
+const http = require("http").Server(app);
 
 // swagger
 const swaggerJsDoc = require("swagger-jsdoc");
@@ -9,8 +14,14 @@ const civilaztions = require("./routes/civilizations");
 const counters = require("./routes/counters");
 const units = require("./routes/units");
 
+// socket.io
+const io = require("socket.io")(http);
+
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
+
 // initialize app
-const app = express();
 const port = 4001;
 
 // swagger options TODO: add to constants file somewhere
@@ -91,6 +102,6 @@ app.get("/counters/:id", counters.findByUnitId);
  */
 app.use("/images", express.static("images"));
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

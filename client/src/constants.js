@@ -1,5 +1,10 @@
 export const API_URL = "http://localhost:4001/";
 export const AOE2NET_URL = "https://aoe2.net/api/";
+export const STEAM_NEWS_URL =
+  "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=813780&count=10&maxlength=300&format=json";
+
+export const STEAM_IMAGE_URL =
+  "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/clans";
 
 export const testInfo = {
   recordsFiltered: 38684,

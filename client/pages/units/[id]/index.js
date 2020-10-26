@@ -19,17 +19,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function getCostString(Cost) {
+  const strings = [
+    { name: "food", value: Cost.Food },
+    { name: "wood", value: Cost.Wood },
+    { name: "gold", value: Cost.Gold },
+    { name: "stone", value: Cost.Stone },
+  ];
+
+  let costString = "";
+  strings.forEach((string) => {
+    if (string.value) {
+      if (costString.length !== 0) costString += ", ";
+
+      costString += string.value;
+    }
+  });
+
+  return costString;
+}
+
 const Unit = ({ unit, counters }) => {
   const classes = useStyles();
-  const { LanguageHelp } = unit;
+  const { LanguageHelp, Cost } = unit;
+
+  const replacedText = LanguageHelp.replace("‹cost›", getCostString(Cost))
+    .replace("‹hp›", "")
+    .replace("‹attack›", "")
+    .replace("‹armor›", "")
+    .replace("‹piercearmor›", "")
+    .replace("‹range›", "");
 
   return (
     <UnitTemplate unit={unit}>
       <Card className={classes.descriptionCard}>
         <CardContent>
-          <Typography
-            dangerouslySetInnerHTML={{ __html: LanguageHelp }}
-          ></Typography>
+          <Typography dangerouslySetInnerHTML={{ __html: replacedText }} />
         </CardContent>
       </Card>
 

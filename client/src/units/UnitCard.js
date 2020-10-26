@@ -14,6 +14,26 @@ import { API_URL } from "../constants";
 import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
+  card: {
+    backgroundColor: theme.palette.background.default,
+    transition: "0.3s",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+    "&:focussed": {
+      transform: "scale(1.05)",
+    },
+  },
+  cardWhite: {
+    backgroundColor: theme.palette.background.paper,
+    transition: "0.3s",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+    "&:focussed": {
+      transform: "scale(1.05)",
+    },
+  },
   cardMedia: {
     width: "100%",
     height: "100%",
@@ -23,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UnitCard = ({ unit }) => {
+const UnitCard = ({ unit, white }) => {
   const classes = useStyles();
   const { ID, name, internal_name, type } = unit;
 
   return (
-    <Card>
+    <Card className={white ? classes.cardWhite : classes.card}>
       <Link href={`/units/${ID}`}>
         <CardActionArea>
           <Grid container spacing={3}>

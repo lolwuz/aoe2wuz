@@ -1,8 +1,35 @@
-import { Card, CardContent, Container, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import Head from "next/head";
+import Link from "next/link";
+import { STEAM_IMAGE_URL, STEAM_NEWS_URL } from "../src/constants";
 import MainTemplate from "../src/templates/MainTemplate";
 
-export default function Home() {
+const useStyles = makeStyles((theme) => ({
+  card: {
+    marginBottom: theme.spacing(3),
+  },
+  newsMedia: {
+    height: 220,
+  },
+  itemTitle: {
+    marginBottom: theme.spacing(3),
+  },
+}));
+
+export default function Home({ news }) {
+  const classes = useStyles();
+
+  const { newsitems } = news.appnews;
+
   return (
     <MainTemplate>
       <Head>
@@ -22,14 +49,62 @@ export default function Home() {
       </Head>
 
       <Container maxWidth="xl">
-        <Card>
-          <CardContent>
-            <Typography variant="h6">Welcome</Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={7}>
+            {newsitems.map((item) => {
+              const firstWord = item.contents.replace(/ .*/, "");
+              const isImage = firstWord.includes("{STEAM_CLAN_IMAGE}");
+              const imageUrl = firstWord.replace(
+                "{STEAM_CLAN_IMAGE}",
+                STEAM_IMAGE_URL
+              );
 
-            <Typography variant="body1">Navigatie</Typography>
-          </CardContent>
-        </Card>
+              return (
+                <Card key={item.gid} className={classes.card}>
+                  <Link href={item.url}>
+                    <CardActionArea>
+                      {isImage && (
+                        <CardMedia
+                          className={classes.newsMedia}
+                          image={imageUrl}
+                        />
+                      )}
+
+                      <CardContent>
+                        <Typography variant="h6" className={classes.itemTitle}>
+                          {item.title}
+                        </Typography>
+
+                        <Typography variant="body1">
+                          {isImage
+                            ? item.contents.replace(firstWord, "")
+                            : item.contents}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Link>
+                </Card>
+              );
+            })}
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <Card>
+              <CardContent>
+                <Typography variant="h4">aoe2dash.com</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </Container>
     </MainTemplate>
   );
+}
+
+export async function getStaticProps(context) {
+  const res = await fetch(STEAM_NEWS_URL);
+  const news = await res.json();
+
+  return {
+    props: { news }, // will be passed to the page component as props
+  };
 }

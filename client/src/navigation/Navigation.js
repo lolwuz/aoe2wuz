@@ -15,6 +15,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import GamesIcon from "@material-ui/icons/Games";
 import { GlobalSearch } from "./GlobalSearch";
 import Link from "next/link";
+import { useSession, getSession } from "next-auth/client";
+import UserAvatar from "./UserAvatar";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor:
       theme.palette.type === "dark"
-        ? theme.palette.background.paper
+        ? theme.palette.primary.main
         : theme.palette.primary.main,
   },
   logo: {
@@ -55,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonMatches: {
     marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(7),
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.background.paper,
     "&:hover": {
@@ -74,9 +77,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = ({ handleToggle, open }) => {
+  const [session, loading] = useSession();
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
   const classes = useStyles();
+
+  console.log(session);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -87,42 +93,52 @@ const Navigation = ({ handleToggle, open }) => {
           </IconButton>
         )}
 
-        <Typography variant="h6" className={classes.title}>
-          aoe2dash.com
-        </Typography>
+        <Link href="/">
+          <Typography variant="h6" className={classes.title}>
+            aoe2dash.com
+          </Typography>
+        </Link>
 
         <div className={classes.globalSearch}>
           <GlobalSearch />
         </div>
 
         <div className={classes.buttons}>
-          <Link href="/leaderboards">
-            <Button size="large" className={classes.button}>
-              leaderboards
-            </Button>
-          </Link>
+          {session && (
+            <>
+              <Link href="/leaderboards">
+                <Button size="large" className={classes.button}>
+                  leaderboards
+                </Button>
+              </Link>
 
-          <Link href="/matches">
-            <Button
-              size="large"
-              variant="contained"
-              className={classes.buttonMatches}
-              startIcon={desktop && <GamesIcon />}
-            >
-              {desktop ? "My Matches" : <GamesIcon />}
-            </Button>
-          </Link>
+              <Link href="/matches">
+                <Button
+                  size="large"
+                  variant="contained"
+                  className={classes.buttonMatches}
+                  startIcon={desktop && <GamesIcon />}
+                >
+                  {desktop ? "My Matches" : <GamesIcon />}
+                </Button>
+              </Link>
+            </>
+          )}
 
-          <Link href="/leaderboards">
-            <Button
-              size="large"
-              variant="outlined"
-              className={classes.buttonRegister}
-              startIcon={desktop && <PersonIcon />}
-            >
-              {desktop ? "Register" : <PersonIcon />}
-            </Button>
-          </Link>
+          {!session ? (
+            <Link href="/api/auth/signin">
+              <Button
+                size="large"
+                variant="outlined"
+                className={classes.buttonRegister}
+                startIcon={desktop && <PersonIcon />}
+              >
+                {desktop ? "Register" : <PersonIcon />}
+              </Button>
+            </Link>
+          ) : (
+            <UserAvatar user={session.user} />
+          )}
         </div>
       </Toolbar>
     </AppBar>

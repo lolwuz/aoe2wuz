@@ -4,8 +4,21 @@ import MainTemplate from "../src/templates/MainTemplate";
 import { AOE2NET_URL } from "../src/constants";
 import { Container, Grid } from "@material-ui/core";
 import MatchCard from "../src/matches/MatchCard";
+import Head from "next/head";
+import { useSession, getSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import Auth from "../src/utils/Auth";
 
 const matches = ({ matches }) => {
+  const router = useRouter();
+  const [session, loading] = useSession();
+
+  // check if server sided render
+  if (typeof window !== "undefined" && loading) return null;
+
+  if (!session) return <Auth />;
+
   return (
     <MainTemplate>
       <Head>
@@ -29,6 +42,11 @@ const matches = ({ matches }) => {
 };
 
 export async function getServerSideProps(context) {
+  const token = await fetch("http://localhost:3001/api/user/token");
+  const tokenRes = await token.json();
+
+  console.log(tokenRes);
+
   const res = await fetch(
     `${AOE2NET_URL}/player/matches?game=aoe2de&steam_id=76561198041482392&count=12`
   );

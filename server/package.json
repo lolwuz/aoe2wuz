@@ -9,8 +9,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "express": "^4.17.1",
+    "express-oauth-server": "^2.0.0",
     "express-reload": "^1.2.0",
+    "redis": "^3.0.2",
+    "socket.io": "^2.3.0",
     "swagger-jsdoc": "^4.2.0",
     "swagger-ui-express": "^4.1.4"
   },

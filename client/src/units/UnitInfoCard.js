@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { API_URL } from "../constants";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 const useStyles = makeStyles((theme) => ({
   infoCard: {},
@@ -57,11 +58,6 @@ const UnitInfoCard = ({ unit }) => {
         <Divider />
 
         <ListItem button>
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
           <ListItemText
             primary={
               <Typography variant="overline">
@@ -69,16 +65,16 @@ const UnitInfoCard = ({ unit }) => {
               </Typography>
             }
           />
+          <ListItemIcon>
+            <IconButton>
+              <ChevronRightIcon />
+            </IconButton>
+          </ListItemIcon>
         </ListItem>
 
         <Divider />
 
         <ListItem button>
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
           <ListItemText
             primary={
               <Typography variant="overline">
@@ -86,16 +82,16 @@ const UnitInfoCard = ({ unit }) => {
               </Typography>
             }
           />
+          <ListItemIcon>
+            <IconButton>
+              <ChevronRightIcon />
+            </IconButton>
+          </ListItemIcon>
         </ListItem>
 
         <Divider />
 
         <ListItem button>
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
           <ListItemText
             primary={
               <Typography variant="overline">
@@ -104,16 +100,16 @@ const UnitInfoCard = ({ unit }) => {
               </Typography>
             }
           />
+          <ListItemIcon>
+            <IconButton>
+              <ChevronRightIcon />
+            </IconButton>
+          </ListItemIcon>
         </ListItem>
 
         <Divider />
 
         <ListItem button>
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
           <ListItemText
             primary={
               <Typography variant="overline">
@@ -122,17 +118,16 @@ const UnitInfoCard = ({ unit }) => {
               </Typography>
             }
           />
+          <ListItemIcon>
+            <IconButton>
+              <ChevronRightIcon />
+            </IconButton>
+          </ListItemIcon>
         </ListItem>
 
         <Divider />
 
         <ListItem button>
-          <ListItemIcon>
-            <IconButton>
-              <ChevronLeftIcon />
-            </IconButton>
-          </ListItemIcon>
-
           <ListItemText
             primary={
               <Typography variant="overline">
@@ -141,6 +136,11 @@ const UnitInfoCard = ({ unit }) => {
               </Typography>
             }
           />
+          <ListItemIcon>
+            <IconButton>
+              <ChevronRightIcon />
+            </IconButton>
+          </ListItemIcon>
         </ListItem>
       </List>
     </Card>

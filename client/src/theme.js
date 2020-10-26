@@ -1,35 +1,38 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import {
-  orange,
   indigo,
   blue,
-  yellow,
   blueGrey,
+  red,
+  deepOrange,
 } from "@material-ui/core/colors";
 
 // Create a theme instance.
-const theme = createMuiTheme({
+const lightTheme = createMuiTheme({
   palette: {
     type: "light",
-    primary: blueGrey,
+    primary: blue,
     secondary: indigo,
     background: {
       default: blueGrey[50],
       paper: "#FFFFFF",
     },
   },
+  shadows: new Array(25).fill(
+    "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+  ),
   shape: {
-    borderRadius: 0,
+    borderRadius: 10,
   },
   spacing: 8,
   typography: {
-    fontFamily: "Source Sans Pro, sans-serif",
-    h1: { fontWeight: 600 },
-    h2: { fontWeight: 600 },
-    h3: { fontWeight: 600 },
-    h4: { fontWeight: 600 },
-    h5: { fontWeight: 600 },
-    h6: { fontWeight: 600 },
+    fontFamily: "Roboto, sans-serif",
+    h1: { fontWeight: 500 },
+    h2: { fontWeight: 500 },
+    h3: { fontWeight: 500 },
+    h4: { fontWeight: 500 },
+    h5: { fontWeight: 500 },
+    h6: { fontWeight: 500 },
     button: {
       fontWeight: 600,
     },
@@ -40,7 +43,6 @@ const theme = createMuiTheme({
       fontSize: 16,
     },
   },
-  shadows: new Array(25).fill("none"),
   overrides: {
     MuiDrawer: {
       paperAnchorDockedLeft: {
@@ -51,6 +53,19 @@ const theme = createMuiTheme({
       focusHighlight: {
         backgroundColor: "white",
       },
+    },
+    MuiButton: {
+      root: {
+        borderRadius: 25,
+      },
+    },
+    MuiInputAdornment: {
+      positionStart: {
+        color: blue[300],
+      },
+    },
+    MuiOutlinedInput: {
+      root: {},
     },
   },
 });
@@ -59,21 +74,24 @@ const theme = createMuiTheme({
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
-    primary: blueGrey,
+    primary: blue,
     secondary: indigo,
   },
+  shadows: new Array(25).fill(
+    "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+  ),
   shape: {
-    borderRadius: 0,
+    borderRadius: 10,
   },
   spacing: 8,
   typography: {
-    fontFamily: "Source Sans Pro, sans-serif",
-    h1: { fontWeight: 600 },
-    h2: { fontWeight: 600 },
-    h3: { fontWeight: 600 },
-    h4: { fontWeight: 600 },
-    h5: { fontWeight: 600 },
-    h6: { fontWeight: 600 },
+    fontFamily: "Roboto, sans-serif",
+    h1: { fontWeight: 500 },
+    h2: { fontWeight: 500 },
+    h3: { fontWeight: 500 },
+    h4: { fontWeight: 500 },
+    h5: { fontWeight: 500 },
+    h6: { fontWeight: 500 },
     button: {
       fontWeight: 600,
     },
@@ -84,7 +102,6 @@ const darkTheme = createMuiTheme({
       fontSize: 16,
     },
   },
-  shadows: new Array(25).fill("none"),
   overrides: {
     MuiDrawer: {
       paperAnchorDockedLeft: {
@@ -96,7 +113,20 @@ const darkTheme = createMuiTheme({
         backgroundColor: "white",
       },
     },
+    MuiButton: {
+      root: {
+        borderRadius: 25,
+      },
+    },
+    MuiInputAdornment: {
+      positionStart: {
+        color: blue[300],
+      },
+    },
+    MuiOutlinedInput: {
+      root: {},
+    },
   },
 });
 
-export default theme;
+export default lightTheme;

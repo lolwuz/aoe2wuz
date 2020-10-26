@@ -38,8 +38,6 @@ const civilizations = ({ civilization }) => {
     setState({ ...state, [name]: value });
   };
 
-  console.log(civ);
-
   return (
     <CivTemplate civilization={civilization}>
       <Card>
@@ -76,8 +74,6 @@ export async function getStaticProps({ params }) {
 
   const res = await fetch(`${API_URL}civilizations/${name}`);
   const data = await res.json();
-
-  console.log(data);
 
   return {
     props: {

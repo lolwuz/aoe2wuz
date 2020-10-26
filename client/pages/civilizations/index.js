@@ -43,19 +43,15 @@ const civilizations = ({ civilizations }) => {
     <MainTemplate>
       <Container maxWidth="xl" className={classes.searchContainer}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={8} md={6}>
+          <Grid item xs={12} sm={8} md={6}></Grid>
+
+          <Grid item xs={12} sm={4} md={6} className={classes.titleGrid}>
             <SearchField
               name="search"
               value={state.search}
               onChange={handleChange}
               label="Search civs..."
             />
-          </Grid>
-
-          <Grid item xs={12} sm={4} md={6} className={classes.titleGrid}>
-            <Typography variant="h4" className={classes.title}>
-              List of Civilizations
-            </Typography>
           </Grid>
         </Grid>
       </Container>

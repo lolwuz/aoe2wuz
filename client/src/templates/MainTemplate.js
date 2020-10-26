@@ -26,6 +26,8 @@ import Link from "next/link";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { useRouter } from "next/router";
 import ListIcon from "../navigation/ListIcon";
+import Chat from "../chat/Chat";
+import { useSession } from "next-auth/client";
 
 const drawerWith = 200;
 
@@ -38,16 +40,22 @@ const useStyles = makeStyles((theme) => ({
       width: drawerWith,
       flexShrink: 0,
     },
+    boxShadow: theme.shadows[5],
   },
   drawerPaper: {
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.background.paper
-        : theme.palette.primary.dark,
+        : theme.palette.background.paper,
     color: theme.palette.background.paper,
     width: drawerWith,
     height: "100%",
     overflowY: "hidden",
+
+    [theme.breakpoints.down("md")]: {
+      width: drawerWith,
+      flexShrink: 0,
+    },
     [theme.breakpoints.down("sm")]: {
       width: "100vw",
       flexShrink: 0,
@@ -62,7 +70,8 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   navList: {
-    background: theme.palette.primary.dark,
+    background: theme.palette.background.paper,
+    marginTop: theme.spacing(3),
   },
   footer: {
     flexGrow: 0,
@@ -80,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     color:
       theme.palette.type === "dark"
         ? theme.palette.text.primary
-        : theme.palette.background.paper,
+        : theme.palette.text.primary,
   },
   navPointer: {
     top: 5,
@@ -94,7 +103,11 @@ const useStyles = makeStyles((theme) => ({
   },
   chatButton: {
     position: "absolute",
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.paper,
     bottom: theme.spacing(3),
+    left: theme.spacing(3),
+    right: theme.spacing(3),
   },
   listItemIcon: {
     width: 30,
@@ -140,13 +153,7 @@ const MainTemplate = ({ children }) => {
             key={index}
           >
             <ListItem button key={text}>
-              <ListItemIcon>
-                <ListIcon
-                  src={`/img/${text}.svg`}
-                  alt={`${text}-icon`}
-                  invert
-                />
-              </ListItemIcon>
+              <ListIcon src={`/img/${text}.svg`} alt={`${text}-icon`} />
               <ListItemText
                 primary={
                   <Typography variant="subtitle1" className={classes.listItem}>
@@ -162,17 +169,6 @@ const MainTemplate = ({ children }) => {
           </Link>
         ))}
       </List>
-
-      <div className={classes.fixBottom}>
-        <Button
-          variant="outlined"
-          color="secondary"
-          fullWidth
-          className={classes.chatButton}
-        >
-          chat
-        </Button>
-      </div>
     </div>
   );
 
@@ -199,45 +195,49 @@ const MainTemplate = ({ children }) => {
         {/* footer */}
         <footer className={classes.footer}>
           <div className={classes.footerDiv}>
-            <Card>
-              <CardContent>
-                <Typography variant="body2">
-                  Age of Empires II DE © Microsoft Corporation. 'website-name'
-                  was created under Microsoft's "Game Content Usage Rules" using
-                  assets from Age of Empires II DE, and it is not endorsed by or
-                  affiliated with Microsoft.
-                </Typography>
+            <Container maxWidth="lg">
+              <Card>
+                <CardContent>
+                  <Typography variant="body2">
+                    Age of Empires II DE © Microsoft Corporation. 'website-name'
+                    was created under Microsoft's "Game Content Usage Rules"
+                    using assets from Age of Empires II DE, and it is not
+                    endorsed by or affiliated with Microsoft.
+                  </Typography>
 
-                <Grid container spacing={3}>
-                  <Grid item xs={8}>
-                    <Typography variant="body2" className={classes.madeBy}>
-                      Made with love by{" "}
+                  <Grid container spacing={3}>
+                    <Grid item xs={8}>
+                      <Typography variant="body2" className={classes.madeBy}>
+                        Made with love by{" "}
+                        <a
+                          target="_about:blank"
+                          rel="noreferrer noopener"
+                          href="https://metmarten.dev"
+                        >
+                          Marten Hoekstra
+                        </a>
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={4}>
                       <a
                         target="_about:blank"
                         rel="noreferrer noopener"
-                        href="https://metmarten.dev"
+                        href="https://github.com/lolwuz/aoe2wuz/"
                       >
-                        Marten Hoekstra
+                        <IconButton className={classes.githubIcon}>
+                          <GitHubIcon />
+                        </IconButton>
                       </a>
-                    </Typography>
+                    </Grid>
                   </Grid>
-
-                  <Grid item xs={4}>
-                    <a
-                      target="_about:blank"
-                      rel="noreferrer noopener"
-                      href="https://github.com/lolwuz/aoe2wuz/"
-                    >
-                      <IconButton className={classes.githubIcon}>
-                        <GitHubIcon />
-                      </IconButton>
-                    </a>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Container>
           </div>
         </footer>
+
+        <Chat />
       </main>
     </div>
   );

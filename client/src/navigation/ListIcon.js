@@ -4,10 +4,12 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   image: {
     width: 15,
+    marginRight: theme.spacing(3),
   },
   imageInvert: {
     width: 15,
     filter: "invert(1)",
+    marginRight: theme.spacing(3),
   },
 }));
 
