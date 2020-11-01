@@ -10,7 +10,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 import SearchField from "../navigation/SearchField";
 
 const useStyles = makeStyles((theme) => ({

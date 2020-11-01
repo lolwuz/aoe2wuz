@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MainTemplate from "../../src/templates/MainTemplate";
 import { API_URL } from "../../src/constants";
 import { Container, Grid, makeStyles } from "@material-ui/core";
-import UnitInfoCard from "../../src/units/UnitInfoCard";
+import UnitInfoCard from "../components/units/UnitInfoCard";
 
 const useStyles = makeStyles((theme) => ({}));
 

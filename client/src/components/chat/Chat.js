@@ -15,7 +15,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import MessageIcon from "@material-ui/icons/Message";
-import useOutsideAlerter from "../utils/useOutsideAlerter";
+import useOutsideAlerter from "../../utils/useOutsideAlerter";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {

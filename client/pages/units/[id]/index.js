@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import UnitTemplate from "../../../src/templates/UnitTemplate";
-import UnitCounterCard from "../../../src/units/UnitCounterCard";
+import UnitCounterCard from "../../../src/components/units/UnitCounterCard";
 
 const useStyles = makeStyles((theme) => ({
   descriptionCard: {

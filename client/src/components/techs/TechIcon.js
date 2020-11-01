@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles, Tooltip, Typography } from "@material-ui/core";
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   techImage: {

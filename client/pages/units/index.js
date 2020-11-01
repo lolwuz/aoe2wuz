@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MainTemplate from "../../src/templates/MainTemplate";
-import UnitCard from "../../src/units/UnitCard";
+import UnitCard from "../../src/components/units/UnitCard";
 import { API_URL } from "../../src/constants";
 import {
   Card,
@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import Head from "next/head";
 import { Alert } from "@material-ui/lab";
-import SearchField from "../../src/navigation/SearchField";
+import SearchField from "../../src/components/navigation/SearchField";
 
 const useStyles = makeStyles((theme) => ({
   typeCard: {

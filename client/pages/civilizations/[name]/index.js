@@ -11,9 +11,9 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import TechIcon from "../../../src/techs/TechIcon";
-import TechsList from "../../../src/techs/TechsList";
-import UnitsList from "../../../src/units/UnitsList";
+import TechIcon from "../../../src/components/techs/TechIcon";
+import TechsList from "../../../src/components/techs/TechsList";
+import UnitsList from "../../../src/components/units/UnitsList";
 import Link from "next/link";
 import { API_URL } from "../../../src/constants";
 import CivTemplate from "../../../src/templates/CivTemplate";

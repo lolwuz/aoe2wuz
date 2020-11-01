@@ -1,6 +1,6 @@
 import { Avatar, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {

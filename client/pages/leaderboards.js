@@ -18,7 +18,7 @@ import Head from "next/head";
 import MainTemplate from "../src/templates/MainTemplate";
 import { DataGrid } from "@material-ui/data-grid";
 import { AOE2NET_URL, testInfo } from "../src/constants";
-import SearchField from "../src/navigation/SearchField";
+import SearchField from "../src/components/navigation/SearchField";
 import { Alert } from "@material-ui/lab";
 import { useRouter } from "next/router";
 

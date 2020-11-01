@@ -10,7 +10,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { GlobalSearch } from "../src/navigation/GlobalSearch";
+import { GlobalSearch } from "../src/components/navigation/GlobalSearch";
 import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({}));

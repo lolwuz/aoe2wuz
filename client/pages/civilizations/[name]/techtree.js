@@ -13,9 +13,9 @@ import {
   useTheme,
 } from "@material-ui/core";
 import techtreeLines from "../../../src/techtree";
-import SearchField from "../../../src/navigation/SearchField";
+import SearchField from "../../../src/components/navigation/SearchField";
 import Link from "next/link";
-import TechtreeItem from "../../../src/techs/TechtreeItem";
+import TechtreeItem from "../../../src/components/techs/TechtreeItem";
 import { Autocomplete } from "@material-ui/lab";
 import { useRouter } from "next/router";
 

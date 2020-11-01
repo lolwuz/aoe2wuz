@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 import GoogleAds from "react-google-ads";
 
 const useStyles = makeStyles((theme) => ({

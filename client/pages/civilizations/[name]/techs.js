@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import { API_URL } from "../../../src/constants";
 import CivTemplate from "../../../src/templates/CivTemplate";
-import TechsList from "../../../src/techs/TechsList";
-import SearchField from "../../../src/navigation/SearchField";
+import TechsList from "../../../src/components/techs/TechsList";
+import SearchField from "../../../src/components/navigation/SearchField";
 
 const useStyles = makeStyles((theme) => ({}));
 

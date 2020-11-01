@@ -14,7 +14,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 import ChevronLeftIcon from "@material-ui/icons/ChevronRight";
 import Link from "next/link";
 import { useRouter } from "next/router";

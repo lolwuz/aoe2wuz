@@ -10,9 +10,9 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import CivCard from "../../src/civilizations/CivCard";
+import CivCard from "../../src/components/civilizations/CivCard";
 import { API_URL } from "../../src/constants";
-import SearchField from "../../src/navigation/SearchField";
+import SearchField from "../../src/components/navigation/SearchField";
 
 const useStyles = makeStyles((theme) => ({
   searchContainer: {

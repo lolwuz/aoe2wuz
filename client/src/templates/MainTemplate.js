@@ -20,13 +20,13 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import Navigation from "../navigation/Navigation";
+import Navigation from "../components/navigation/Navigation";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Link from "next/link";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { useRouter } from "next/router";
-import ListIcon from "../navigation/ListIcon";
-import Chat from "../chat/Chat";
+import ListIcon from "../components/navigation/ListIcon";
+import Chat from "../components/chat/Chat";
 import { useSession } from "next-auth/client";
 
 const drawerWith = 200;

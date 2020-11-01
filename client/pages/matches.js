@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MainTemplate from "../src/templates/MainTemplate";
 import { AOE2NET_URL } from "../src/constants";
 import { Container, Grid } from "@material-ui/core";
-import MatchCard from "../src/matches/MatchCard";
+import MatchCard from "../src/components/matches/MatchCard";
 import Head from "next/head";
 import { useSession, getSession } from "next-auth/client";
 import { useRouter } from "next/router";
