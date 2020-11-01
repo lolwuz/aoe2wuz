@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     backgroundColor:
       theme.palette.type === "dark"
-        ? theme.palette.background.paper
+        ? theme.palette.primary.light
         : theme.palette.background.paper,
     color: theme.palette.background.paper,
     width: drawerWith,
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   navList: {
     background: theme.palette.background.paper,
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(0),
   },
   footer: {
     flexGrow: 0,
@@ -88,8 +88,8 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     color:
       theme.palette.type === "dark"
-        ? theme.palette.text.primary
-        : theme.palette.text.primary,
+        ? theme.palette.primary.contrastText
+        : theme.palette.text.secondary,
   },
   navPointer: {
     top: 5,

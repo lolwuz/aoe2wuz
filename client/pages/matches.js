@@ -42,11 +42,6 @@ const matches = ({ matches }) => {
 };
 
 export async function getServerSideProps(context) {
-  const token = await fetch("http://localhost:3001/api/user/token");
-  const tokenRes = await token.json();
-
-  console.log(tokenRes);
-
   const res = await fetch(
     `${AOE2NET_URL}/player/matches?game=aoe2de&steam_id=76561198041482392&count=12`
   );

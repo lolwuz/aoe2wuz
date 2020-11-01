@@ -1,5 +1,5 @@
 const express = require("express");
-const OAuthServer = require("express-oauth-server");
+const bodyParser = require("body-parser");
 
 // server
 const app = express();
@@ -13,6 +13,7 @@ const swaggerUi = require("swagger-ui-express");
 const civilaztions = require("./routes/civilizations");
 const counters = require("./routes/counters");
 const units = require("./routes/units");
+const user = require("./routes/user");
 
 // socket.io
 const io = require("socket.io")(http);
@@ -41,6 +42,11 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -101,6 +107,22 @@ app.get("/counters/:id", counters.findByUnitId);
  *    description: returns images
  */
 app.use("/images", express.static("images"));
+
+/**
+ * @swagger
+ * /user/token:
+ *  POST:
+ *    description: get a jwt access token
+ */
+app.post("/user/token", user.token);
+
+/**
+ * @swagger
+ * /user/token/:token:
+ *  GET:
+ *    description: get a user from JWT token
+ */
+app.get("/user/token/:token", user.getUserFromToken);
 
 http.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
