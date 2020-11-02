@@ -14,6 +14,7 @@ const civilaztions = require("./routes/civilizations");
 const counters = require("./routes/counters");
 const units = require("./routes/units");
 const user = require("./routes/user");
+const cookieParser = require("cookie-parser");
 
 // socket.io
 const io = require("socket.io")(http);
@@ -47,6 +48,8 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 

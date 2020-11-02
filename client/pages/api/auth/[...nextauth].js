@@ -6,6 +6,7 @@ const getTokenFromServer = async (provider, user) => {
   const res = await fetch(`${API_URL}user/token`, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     method: "POST",
     body: JSON.stringify({ provider, user }),
@@ -18,6 +19,9 @@ const getTokenFromServer = async (provider, user) => {
 const getUserFromAPI = async (token) => {
   const res = await fetch(`${API_URL}user/token/${token}`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   const user = await res.json();
 
@@ -42,7 +46,7 @@ const providers = [
 const callbacks = {};
 
 callbacks.signIn = async function signIn(user, account, metadata) {
-  console.log("account token: ", account.accessToken);
+  console.log({ user, account, metadata });
   // handle provider API calls
   switch (account.provider) {
     case "github":
@@ -64,6 +68,7 @@ callbacks.signIn = async function signIn(user, account, metadata) {
         login: metadata.login,
         name: metadata.name,
         avatar: user.image,
+        accessToken: account.accessToken,
       };
 
       user.accessToken = await getTokenFromServer("facebook", facebookUser);
@@ -76,6 +81,7 @@ callbacks.signIn = async function signIn(user, account, metadata) {
         login: metadata.login,
         name: metadata.name,
         avatar: user.image,
+        accessToken: account.accessToken,
       };
 
       user.accessToken = await getTokenFromServer("google", googleUser);
@@ -99,7 +105,7 @@ callbacks.jwt = async function jwt(token, user) {
  */
 callbacks.session = async function session(session, token) {
   session.accessToken = token.accessToken;
-  session.user = await getUserFromAPI(session.accessToken);
+  session.user = getUserFromAPI(session.accessToken);
 
   return session;
 };
@@ -122,7 +128,8 @@ const session = {
 
 /** jwt options and secrets */
 const jwt = {
-  secret: process.env.JWT_SECRET,
+  secret: process.env.SECRET,
+  encryption: true,
 };
 
 const options = {
@@ -130,8 +137,9 @@ const options = {
   callbacks,
   pages,
   session,
+  secret: process.env.SECRET,
   jwt,
-  debug: false,
+  debug: true,
 };
 
 export default (req, res) => NextAuth(req, res, options);
