@@ -23,6 +23,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import LockIcon from "@material-ui/icons/Lock";
 import EmailIcon from "@material-ui/icons/Email";
 import Link from "next/link";
+import TechtreeLayout from "../../src/templates/TechtreeLayout";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
   },
   card: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(12),
   },
   cardContent: {
     padding: theme.spacing(6),
@@ -58,7 +59,7 @@ function login() {
   const classes = useStyles();
 
   return (
-    <MainTemplate>
+    <TechtreeLayout>
       <Container maxWidth="sm">
         <Card className={classes.card}>
           <Grid container>
@@ -183,7 +184,7 @@ function login() {
           </div>
         </Card>
       </Container>
-    </MainTemplate>
+    </TechtreeLayout>
   );
 }
 

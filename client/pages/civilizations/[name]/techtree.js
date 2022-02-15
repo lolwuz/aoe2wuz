@@ -18,6 +18,7 @@ import Link from "next/link";
 import TechtreeItem from "../../../src/components/techs/TechtreeItem";
 import { Autocomplete } from "@material-ui/lab";
 import { useRouter } from "next/router";
+import TechtreeLayout from "../../../src/templates/TechtreeLayout";
 
 const lineHeight = 220;
 const itemSize = 70;
@@ -27,13 +28,13 @@ const paddingLeft = 140;
 
 const useStyles = makeStyles((theme) => ({
   searchContainer: {
-    marginTop: -theme.spacing(3),
+    marginTop: theme.spacing(9),
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
     borderRadius: 0,
   },
   techtree: {
-    width: "calc(100vw - 220px)",
+    width: "100vw",
     overflowX: "scroll",
     [theme.breakpoints.down("md")]: {
       width: "100%",
@@ -76,7 +77,7 @@ function techtree({ civilization, civilizations }) {
   const { name } = router.query;
 
   return (
-    <MainTemplate>
+    <TechtreeLayout>
       <Container maxWidth="xl" className={classes.searchContainer}>
         <Grid container spacing={3}>
           <Grid item xs={4} sm={6} md={8}>
@@ -302,7 +303,7 @@ function techtree({ civilization, civilizations }) {
           })}
         </div>
       </div>
-    </MainTemplate>
+    </TechtreeLayout>
   );
 }
 

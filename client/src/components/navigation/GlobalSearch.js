@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
     display: "flex",
     alignItems: "center",
-    backgroundColor: theme.palette.primary.dark,
-    borderRadius: theme.shape.borderRadius * 4,
+    backgroundColor: theme.palette.primary.light,
+    borderRadius: theme.shape.borderRadius,
   },
   input: {
     marginLeft: theme.spacing(1),

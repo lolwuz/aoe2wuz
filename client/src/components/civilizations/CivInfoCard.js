@@ -21,7 +21,6 @@ import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   selected: {
-    backgroundColor: theme.palette.primary[50],
     border: `solid 4px ${theme.palette.background.paper}`,
   },
   icon: {

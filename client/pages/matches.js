@@ -41,12 +41,15 @@ const matches = ({ matches }) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ query }) {
+  const { steam_id } = query;
+
+  const use_id = steam_id ? steam_id : "76561198041482392"; // TODO: get user steam id from database or STEAM sign in
+
   const res = await fetch(
-    `${AOE2NET_URL}/player/matches?game=aoe2de&steam_id=76561198041482392&count=12`
+    `${AOE2NET_URL}/player/matches?game=aoe2de&steam_id=${use_id}&count=12`
   );
   const matches = await res.json();
-
   return {
     props: { matches }, // will be passed to the page component as props
   };

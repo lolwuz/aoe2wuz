@@ -24,10 +24,10 @@ const UnitsList = ({ units }) => {
 
   return (
     <div className={classes.unitsList}>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {units.map((unit) => (
           <Grid item xs={4} key={unit.ID}>
-            <UnitCard unit={unit} />
+            <UnitCard unit={unit} white />
           </Grid>
         ))}
       </Grid>

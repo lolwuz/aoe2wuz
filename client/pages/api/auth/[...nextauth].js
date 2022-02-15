@@ -1,32 +1,5 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { API_URL } from "../../../src/constants";
-
-const getTokenFromServer = async (provider, user) => {
-  const res = await fetch(`${API_URL}user/token`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    method: "POST",
-    body: JSON.stringify({ provider, user }),
-  });
-  const token = await res.json();
-
-  return token;
-};
-
-const getUserFromAPI = async (token) => {
-  const res = await fetch(`${API_URL}user/token/${token}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const user = await res.json();
-
-  return user;
-};
 
 const providers = [
   Providers.GitHub({
@@ -43,73 +16,6 @@ const providers = [
   }),
 ];
 
-const callbacks = {};
-
-callbacks.signIn = async function signIn(user, account, metadata) {
-  console.log({ user, account, metadata });
-  // handle provider API calls
-  switch (account.provider) {
-    case "github":
-      const githubUser = {
-        id: metadata.id,
-        login: metadata.login,
-        name: metadata.name,
-        avatar: user.image,
-        accessToken: account.accessToken,
-      };
-
-      user.accessToken = await getTokenFromServer("github", githubUser);
-
-      return true;
-
-    case "facebook":
-      const facebookUser = {
-        id: metadata.id,
-        login: metadata.login,
-        name: metadata.name,
-        avatar: user.image,
-        accessToken: account.accessToken,
-      };
-
-      user.accessToken = await getTokenFromServer("facebook", facebookUser);
-
-      return true;
-
-    case "google":
-      const googleUser = {
-        id: metadata.id,
-        login: metadata.login,
-        name: metadata.name,
-        avatar: user.image,
-        accessToken: account.accessToken,
-      };
-
-      user.accessToken = await getTokenFromServer("google", googleUser);
-
-      return true;
-
-    default:
-      return false;
-  }
-};
-
-/** jwt callback */
-callbacks.jwt = async function jwt(token, user) {
-  if (user) token = { accessToken: user.accessToken };
-
-  return token;
-};
-
-/**
- * session callback
- */
-callbacks.session = async function session(session, token) {
-  session.accessToken = token.accessToken;
-  session.user = getUserFromAPI(session.accessToken);
-
-  return session;
-};
-
 /**
  * next-auth.js.org pages
  */
@@ -118,7 +24,7 @@ const pages = {
   // signOut: "/api/auth/signout", // Displays form with sign out button
   // error: "/api/auth/error", // Error code passed in query string as ?error=
   // verifyRequest: "/api/auth/verify-request", // Used for check email page
-  // newUser: null, // If set, new users will be directed here on first sign in
+  newUser: "/auth/info", // If set, new users will be directed here on first sign in
 };
 
 /** session options */
@@ -132,13 +38,16 @@ const jwt = {
   encryption: true,
 };
 
+const callbacks = {};
+
 const options = {
+  database: process.env.DATABASE_URL,
   providers,
-  callbacks,
   pages,
-  session,
   secret: process.env.SECRET,
+  session,
   jwt,
+  callbacks,
   debug: true,
 };
 

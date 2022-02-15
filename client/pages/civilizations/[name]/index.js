@@ -19,9 +19,6 @@ import { API_URL } from "../../../src/constants";
 import CivTemplate from "../../../src/templates/CivTemplate";
 
 const useStyles = makeStyles((theme) => ({
-  infoCard: {
-    marginTop: -theme.spacing(3),
-  },
   returnButton: {
     marginBottom: theme.spacing(3),
   },
@@ -40,14 +37,10 @@ const civilizations = ({ civilization }) => {
 
   return (
     <CivTemplate civilization={civilization}>
-      <Card>
-        <CardContent>
-          <Typography
-            variant="body1"
-            dangerouslySetInnerHTML={{ __html: civ.help_text }}
-          />
-        </CardContent>
-      </Card>
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{ __html: civ.help_text }}
+      />
     </CivTemplate>
   );
 };

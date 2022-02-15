@@ -20,6 +20,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import GoogleIcon from "@material-ui/icons/GTranslate";
 import Link from "next/link";
 import { providers, signIn } from "next-auth/client";
+import TechtreeLayout from "../../src/templates/TechtreeLayout";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
   },
   card: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(12),
   },
   cardContent: {
     padding: theme.spacing(6),
@@ -55,7 +56,7 @@ function login({ providers }) {
   const classes = useStyles();
 
   return (
-    <MainTemplate>
+    <TechtreeLayout>
       <Container maxWidth="sm">
         <Card className={classes.card}>
           <Grid container>
@@ -119,7 +120,7 @@ function login({ providers }) {
           </div>
         </Card>
       </Container>
-    </MainTemplate>
+    </TechtreeLayout>
   );
 }
 

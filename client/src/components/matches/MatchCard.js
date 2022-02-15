@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import MatchPlayer from "../player/MatchPlayer";
+import MapInfo from "./MapInfo";
 
 const useStyles = makeStyles((theme) => ({
   vsGrid: {
@@ -21,7 +22,24 @@ const useStyles = makeStyles((theme) => ({
 
 const MatchCard = ({ match }) => {
   const classes = useStyles();
-  const { players, match_uuid } = match;
+  const { players, match_uuid, opened, map_type, map_size } = match;
+
+  console.log(match);
+
+  const getTimeElapsedString = () => {
+    const time_elapsed = new Date() - new Date(opened * 1000);
+
+    const days_elapsed = time_elapsed / (1000 * 3600 * 24);
+    const hours_elapsed = time_elapsed / (1000 * 3600);
+    const minutes_elapsed = time_elapsed / 1000;
+
+    if (days_elapsed > 1) return `${Math.round(days_elapsed)} days ago`;
+
+    if (hours_elapsed > 1) return `${Math.round(hours_elapsed)} hours ago`;
+
+    if (minutes_elapsed > 1)
+      return `${Math.round(minutes_elapsed)} minutes ago`;
+  };
 
   const teams = players
     .map((player) => {
@@ -32,11 +50,15 @@ const MatchCard = ({ match }) => {
     });
 
   return (
-    <Card>
+    <Card style={{ height: "100%" }}>
       <CardContent>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Typography variant="h6">{match_uuid}</Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={7}>
+            <Typography variant="h5">{getTimeElapsedString()}</Typography>
+          </Grid>
+
+          <Grid item xs={5}>
+            <MapInfo map_type={map_type} map_size={map_size} />
           </Grid>
 
           {teams.map((team, index) => (

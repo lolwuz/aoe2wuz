@@ -40,18 +40,15 @@ const useStyles = makeStyles((theme) => ({
       width: drawerWith,
       flexShrink: 0,
     },
-    boxShadow: theme.shadows[5],
+    backgroundColor: theme.palette.primary.light,
+    boxShadow: "none",
+    boxShadow: theme.shadows[10],
   },
   drawerPaper: {
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.primary.light
-        : theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
     color: theme.palette.background.paper,
     width: drawerWith,
-    height: "100%",
     overflowY: "hidden",
-
     [theme.breakpoints.down("md")]: {
       width: drawerWith,
       flexShrink: 0,
@@ -71,7 +68,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   navList: {
     background: theme.palette.background.paper,
-    marginTop: theme.spacing(0),
+    padding: 0,
+    paddingTop: theme.spacing(3),
+    padding: theme.spacing(1),
   },
   footer: {
     flexGrow: 0,
@@ -86,10 +85,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   listItem: {
-    color:
-      theme.palette.type === "dark"
-        ? theme.palette.primary.contrastText
-        : theme.palette.text.secondary,
+    borderRadius: theme.shape.borderRadius,
+    color: theme.palette.text.primary,
+    "&:hover": {
+      backgroundColor: theme.palette.primary[50],
+    },
+  },
+  listItemSelected: {
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.primary.main,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+    },
   },
   navPointer: {
     top: 5,
@@ -143,31 +150,43 @@ const MainTemplate = ({ children }) => {
           "Buildings",
           "Counters",
           "Techtree",
-        ].map((text, index) => (
-          <Link
-            href={
-              text === "Techtree"
-                ? "/civilizations/Aztecs/techtree"
-                : `/${text.toLowerCase()}`
-            }
-            key={index}
-          >
-            <ListItem button key={text}>
-              <ListIcon src={`/img/${text}.svg`} alt={`${text}-icon`} />
-              <ListItemText
-                primary={
-                  <Typography variant="subtitle1" className={classes.listItem}>
-                    {text.toUpperCase()}
-                  </Typography>
-                }
-              />
+        ].map((text, index) => {
+          const isSelected = pathname
+            .toLowerCase()
+            .includes(text.toLowerCase());
 
-              {pathname.toLowerCase().includes(text.toLowerCase()) && (
-                <div className={classes.navPointer} />
-              )}
-            </ListItem>
-          </Link>
-        ))}
+          return (
+            <Link
+              href={
+                text === "Techtree"
+                  ? "/civilizations/Aztecs/techtree"
+                  : `/${text.toLowerCase()}`
+              }
+              key={index}
+            >
+              <ListItem
+                button
+                key={text}
+                className={
+                  isSelected ? classes.listItemSelected : classes.listItem
+                }
+              >
+                <ListIcon
+                  src={`/img/${text}.svg`}
+                  alt={`${text}-icon`}
+                  invert={isSelected}
+                />
+                <ListItemText
+                  primary={
+                    <Typography variant="subtitle1">
+                      {text.toUpperCase()}
+                    </Typography>
+                  }
+                />
+              </ListItem>
+            </Link>
+          );
+        })}
       </List>
     </div>
   );
@@ -190,7 +209,7 @@ const MainTemplate = ({ children }) => {
         {/* Enables room for toolbar */}
         <div className={classes.toolbar} />
 
-        <div className={classes.contentHeight}>{children}</div>
+        <main className={classes.contentHeight}>{children}</main>
 
         {/* footer */}
         <footer className={classes.footer}>

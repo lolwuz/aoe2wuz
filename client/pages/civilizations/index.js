@@ -43,7 +43,7 @@ const civilizations = ({ civilizations }) => {
     <MainTemplate>
       <Container maxWidth="xl" className={classes.searchContainer}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={8} md={6}></Grid>
+          <Grid item xs={12} sm={8} md={6} />
 
           <Grid item xs={12} sm={4} md={6} className={classes.titleGrid}>
             <SearchField
@@ -57,7 +57,7 @@ const civilizations = ({ civilizations }) => {
       </Container>
 
       <Container maxWidth="xl" className={classes.itemsContainer}>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {civilizations
             .filter((civ) =>
               civ.name.toUpperCase().includes(state.search.toUpperCase())

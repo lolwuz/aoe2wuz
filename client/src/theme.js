@@ -1,26 +1,46 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import {
-  indigo,
-  blue,
-  blueGrey,
-  red,
-  deepOrange,
-} from "@material-ui/core/colors";
+import { blue, blueGrey, red, orange } from "@material-ui/core/colors";
+
+const shadows = [
+  "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+];
 
 // Create a theme instance.
 const lightTheme = createMuiTheme({
   palette: {
     type: "light",
-    primary: blue,
-    secondary: indigo,
+    primary: red,
+    secondary: blue,
     background: {
       default: blueGrey[50],
       paper: "#FFFFFF",
     },
   },
-  shadows: new Array(25).fill(
-    "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
-  ),
+  shadows: shadows,
   shape: {
     borderRadius: 10,
   },
@@ -47,16 +67,12 @@ const lightTheme = createMuiTheme({
     MuiDrawer: {
       paperAnchorDockedLeft: {
         borderWidth: 0,
+        boxShadow: "none",
       },
     },
     MuiCardActionArea: {
       focusHighlight: {
         backgroundColor: "white",
-      },
-    },
-    MuiButton: {
-      root: {
-        borderRadius: 25,
       },
     },
     MuiInputAdornment: {
@@ -74,14 +90,12 @@ const lightTheme = createMuiTheme({
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
-    primary: blue,
-    secondary: indigo,
+    primary: red,
+    secondary: red,
   },
-  shadows: new Array(25).fill(
-    "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
-  ),
+  shadows: new Array(25).fill("none"),
   shape: {
-    borderRadius: 10,
+    borderRadius: 0,
   },
   spacing: 8,
   typography: {

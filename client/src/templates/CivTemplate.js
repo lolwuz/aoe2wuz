@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MainTemplate from "../../src/templates/MainTemplate";
-import { Button, Container, Grid, makeStyles } from "@material-ui/core";
+import { Button, Card, Container, Grid, makeStyles } from "@material-ui/core";
 import UnitInfoCard from "../components/units/UnitInfoCard";
 import CivCard from "../components/civilizations/CivCard";
 import CivInfoCard from "../components/civilizations/CivInfoCard";
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   techtreeButton: {
     float: "right",
   },
+  children: {},
 }));
 
 const CivTemplate = ({ civilization, children }) => {
@@ -34,11 +35,17 @@ const CivTemplate = ({ civilization, children }) => {
 
         <meta name="description" content={civ.help_text} />
       </Head>
+
       <Container maxWidth="xl">
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Link href="/civilizations">
-              <Button variant="contained" color="primary" size="large">
+              <Button variant="contained" color="secondary" size="large">
+                <ListIcon
+                  src={`/img/civilizations.svg`}
+                  alt={`civ-icon`}
+                  invert
+                />
                 return
               </Button>
             </Link>
@@ -46,15 +53,8 @@ const CivTemplate = ({ civilization, children }) => {
             <Link href={`/civilizations/${civ.name}/techtree`}>
               <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 size="large"
-                endIcon={
-                  <ListIcon
-                    src="/img/Techtree.svg"
-                    alt="techtree-icon"
-                    invert
-                  />
-                }
                 className={classes.techtreeButton}
               >
                 techtree
@@ -62,12 +62,23 @@ const CivTemplate = ({ civilization, children }) => {
             </Link>
           </Grid>
 
-          <Grid item xs={12} md={5} lg={5} xl={4}>
-            <CivInfoCard civ={civ} />
-          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={5} lg={5} xl={4}>
+                <CivInfoCard civ={civ} />
+              </Grid>
 
-          <Grid item xs={12} md={7} lg={7} xl={8}>
-            {children}
+              <Grid
+                item
+                xs={12}
+                md={7}
+                lg={7}
+                xl={8}
+                className={classes.children}
+              >
+                {children}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>

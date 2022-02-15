@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonMatches: {
     marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(7),
+    marginRight: theme.spacing(5),
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.background.paper,
     "&:hover": {
@@ -81,8 +81,6 @@ const Navigation = ({ handleToggle, open }) => {
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up("md"));
   const classes = useStyles();
-
-  console.log(session);
 
   return (
     <AppBar position="fixed" className={classes.appBar}>

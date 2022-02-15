@@ -36,7 +36,7 @@ const index = ({ data }) => {
       <Typography variant="h6" className={classes.typeTitle}>
         {type}
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {units
           .filter((unit) => unit.type === type)
           .map((unit) => (
